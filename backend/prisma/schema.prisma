@@ -14,7 +14,12 @@ model Product {
   name    String
   slug    String         @unique
   img     String
-  price   String
+  card_photo String
+  price   Json
+  skin_type     String?
+  skin_concern  String?
+  brand String
+  category String
   details ProductDetails?
 }
 
@@ -22,10 +27,10 @@ model ProductDetails {
   id            Int     @id @default(autoincrement())
   productId     Int     @unique
   Product       Product @relation(fields: [productId], references: [id])
-  product_type  String
-  skin_type     String
-  skin_concern  String
-  size          Int?
+  sizes         Json?
   description   String
   key_ingredient String
-}
+  how_to_use    Json?
+  benefits      Json?
+  photos Json?
+  }

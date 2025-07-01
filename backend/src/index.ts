@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { userRouter } from "./module/user/user.router";
 
 const app: Application = express();
 app.use(cors());
@@ -12,5 +13,7 @@ app.get("/", (req, res) => {
     message: "TOK is healing.",
   });
 });
+
+app.use("/api/v1", userRouter);
 
 export default app;

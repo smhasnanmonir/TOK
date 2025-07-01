@@ -9,6 +9,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  phone String?
+  address String?
+  city String?
+  zip String?
+  country String?
+  role String @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reviews Reviews[]
+}
+
 model Product {
   id      Int            @id @default(autoincrement())
   name    String
@@ -21,6 +37,7 @@ model Product {
   brand String
   category String
   details ProductDetails?
+  reviews Reviews[]
 }
 
 model ProductDetails {
@@ -33,4 +50,17 @@ model ProductDetails {
   how_to_use    Json?
   benefits      Json?
   photos Json?
-  }
+}
+
+model Reviews {
+  id Int @id @default(autoincrement())
+  productId Int
+  product Product @relation(fields: [productId], references: [id])
+  rating Int
+  review String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user_id String
+  user User @relation(fields: [user_id], references: [id])
+}
+

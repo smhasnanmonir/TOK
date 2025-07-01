@@ -2,5 +2,4 @@
 node_modules
 /src/generated/prisma
 wrangler.toml
-migrations
 .wrangler

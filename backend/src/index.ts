@@ -1,19 +1,71 @@
-import express, { Application, Request, Response } from "express";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import { userRouter } from "./module/user/user.router";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { logger } from "hono/logger";
+import { prettyJSON } from "hono/pretty-json";
+import auth from "./routes/auth";
+import productsRouter from "./routes/products";
+import ordersRouter from "./routes/orders";
 
-const app: Application = express();
-app.use(cors());
-app.use(express.json());
-app.use(cookieParser());
+const app = new Hono<{
+  Bindings: {
+    DB: D1Database;
+    JWT_SECRET: string;
+  };
+}>();
 
-app.get("/", (req, res) => {
-  res.send({
-    message: "TOK is healing.",
+// Middleware
+app.use("*", logger());
+app.use("*", prettyJSON());
+app.use(
+  "*",
+  cors({
+    origin: [
+      "http://localhost:8787",
+      "https://tok-backend.qbb5st7w6.workers.dev",
+    ],
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
+// Health check
+app.get("/", (c) => {
+  return c.json({
+    message: "TOK Backend API",
+    version: "1.0.0",
+    status: "healthy",
+    timestamp: new Date().toISOString(),
   });
 });
 
-app.use("/api/v1", userRouter);
+// API routes
+app.route("/api/auth", auth);
+app.route("/api/products", productsRouter);
+app.route("/api/orders", ordersRouter);
+
+// 404 handler
+app.notFound((c) => {
+  return c.json(
+    {
+      error: "Not Found",
+      message: "The requested resource was not found",
+      path: c.req.path,
+    },
+    404
+  );
+});
+
+// Error handler
+app.onError((err, c) => {
+  console.error("Application error:", err);
+  return c.json(
+    {
+      error: err.message,
+      message: "Something went wrong on our end",
+    },
+    500
+  );
+});
 
 export default app;

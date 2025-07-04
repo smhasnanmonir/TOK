@@ -1,6 +1,3 @@
-import { eq } from "drizzle-orm";
-import { sign, verify } from "hono/jwt";
-import { createDB, NewUser, users } from "../../db";
 import { Context } from "hono";
 import { userService } from "./auth.services";
 
@@ -26,7 +23,7 @@ export const userRegisterController = async (
         email,
         name,
         password,
-        role: role || "user",
+        role: "user",
       }
     );
     return c.json(

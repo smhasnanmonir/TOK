@@ -53,6 +53,14 @@ CREATE TABLE `reviews` (
 	`user_id` text NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE `shopByCategory` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text NOT NULL,
+	`slug` text NOT NULL,
+	`img` text NOT NULL,
+	`created_at` integer
+);
+--> statement-breakpoint
 CREATE TABLE `users` (
 	`id` text PRIMARY KEY NOT NULL,
 	`name` text NOT NULL,
@@ -70,4 +78,5 @@ CREATE TABLE `users` (
 --> statement-breakpoint
 CREATE UNIQUE INDEX `product_details_product_id_unique` ON `product_details` (`product_id`);--> statement-breakpoint
 CREATE UNIQUE INDEX `products_slug_unique` ON `products` (`slug`);--> statement-breakpoint
+CREATE UNIQUE INDEX `shopByCategory_slug_unique` ON `shopByCategory` (`slug`);--> statement-breakpoint
 CREATE UNIQUE INDEX `users_email_unique` ON `users` (`email`);

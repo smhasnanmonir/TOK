@@ -1,11 +1,4 @@
-import {
-  sqliteTable,
-  text,
-  integer,
-  real,
-  primaryKey,
-  unique,
-} from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 import { relations, sql } from "drizzle-orm";
 
 // Users table
@@ -40,6 +33,7 @@ export const products = sqliteTable("products", {
   skin_concern: text("skin_concern"),
   brand: text("brand").notNull(),
   category: text("category").notNull(),
+  stock: integer("in_stock", { mode: "boolean" }).notNull().default(true),
 });
 
 // ProductDetails table
@@ -51,7 +45,7 @@ export const productDetails = sqliteTable("product_details", {
   key_ingredient: text("key_ingredient").notNull(),
   how_to_use: text("how_to_use"),
   benefits: text("benefits"),
-  photos: text("photos"),
+  photos: text("photos").$type<string[]>(),
 });
 
 // Reviews table
@@ -131,6 +125,16 @@ export const orderItems = sqliteTable("order_items", {
     .references(() => products.id),
   quantity: integer("quantity").notNull(),
   price: real("price").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
+    () => new Date()
+  ),
+});
+
+export const shopByCategory = sqliteTable("shopByCategory", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  img: text("img").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
     () => new Date()
   ),

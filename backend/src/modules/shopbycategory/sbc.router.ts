@@ -13,3 +13,8 @@ shopByCategoryRouter.get(
   "/fetch",
   shopByCategoryController.shopByCategoryFetchController
 );
+
+shopByCategoryRouter.post(
+  "/post",
+  shopByCategoryController.shopByCategoryPostController
+);

@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "e304a631-2f01-4fda-8074-2e6a5e7d9b38",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "fa235bdf-82b2-4c60-9ab8-bd08ac92d0e6",
+  "prevId": "e304a631-2f01-4fda-8074-2e6a5e7d9b38",
   "tables": {
     "order_items": {
       "name": "order_items",
@@ -293,6 +293,14 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "in_stock": {
+          "name": "in_stock",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": true
         }
       },
       "indexes": {

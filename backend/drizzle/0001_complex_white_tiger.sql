@@ -1,0 +1,1 @@
+ALTER TABLE products ADD `in_stock` integer DEFAULT true NOT NULL;

@@ -22,7 +22,7 @@ const ShopByCategory = async () => {
         {categories?.result.map(
           (category: { id: number; name: string; img: string }) => (
             <div
-              className=" rounded-md p-[16px] cursor-pointer border border-gray-200/40 inset-shadow-indigo-500/50"
+              className=" rounded-md p-[16px] cursor-pointer border-[2px] border-gray-200/20 inset-shadow-indigo-500/50"
               key={category.id}
             >
               <img

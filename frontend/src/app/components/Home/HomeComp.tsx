@@ -1,6 +1,7 @@
 import Navbar from "../navbar/Navbar";
 import BestSellerProduct from "./BestSellers/BestSellerProduct";
 import HeroSection from "./HeroSection";
+import ShopByCategory from "./ShopByCategory/ShopByCategory";
 import ShopByTopBrand from "./ShopByTopBrand/ShopByTopBrand";
 
 const HomeComp = () => {
@@ -13,6 +14,7 @@ const HomeComp = () => {
       <HeroSection></HeroSection>
       <BestSellerProduct></BestSellerProduct>
       <ShopByTopBrand></ShopByTopBrand>
+      <ShopByCategory></ShopByCategory>
     </div>
   );
 };

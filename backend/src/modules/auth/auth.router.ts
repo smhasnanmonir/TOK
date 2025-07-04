@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { userRegisterController } from "./auth.controller";
+import { D1Database } from "@cloudflare/workers-types";
 
 // Router (auth-router.ts)
 export const authRouter = new Hono<{

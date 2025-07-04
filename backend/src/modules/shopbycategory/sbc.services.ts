@@ -1,6 +1,6 @@
 import { createDB } from "../../db";
-import { shopByCategoryController } from "./sbc.controller";
 import { shopByCategory } from "../../db/schema";
+import { D1Database } from "@cloudflare/workers-types";
 
 const shopByCategoryFetchService = async (db: D1Database) => {
   const drizzleDB = createDB(db);

@@ -1,13 +1,7 @@
 import { Context } from "hono";
 import { shopByCategoryService } from "./sbc.services";
 
-const shopByCategoryFetchController = async (
-  c: Context<{
-    Bindings: {
-      DB: D1Database;
-    };
-  }>
-) => {
+const shopByCategoryFetchController = async (c: Context) => {
   const result = await shopByCategoryService.shopByCategoryFetchService(
     c.env.DB
   );
@@ -17,13 +11,7 @@ const shopByCategoryFetchController = async (
   });
 };
 
-const shopByCategoryPostController = async (
-  c: Context<{
-    Bindings: {
-      DB: D1Database;
-    };
-  }>
-) => {
+const shopByCategoryPostController = async (c: Context) => {
   const { name, slug, img } = await c.req.json();
   try {
     const result = await shopByCategoryService.shopByCategoryPostService(
@@ -34,10 +22,10 @@ const shopByCategoryPostController = async (
       message: "shop by category Posted!",
       result: result,
     });
-  } catch (error: any) {
+  } catch (error) {
     return c.json({
       message: "Something went wrong!",
-      error: error.message,
+      error: error,
     });
   }
 };

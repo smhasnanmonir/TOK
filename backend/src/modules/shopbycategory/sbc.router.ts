@@ -1,11 +1,11 @@
 import { Hono } from "hono";
 import { shopByCategoryController } from "./sbc.controller";
+import { D1Database } from "@cloudflare/workers-types";
 
 // Router (auth-router.ts)
 export const shopByCategoryRouter = new Hono<{
   Bindings: {
     DB: D1Database;
-    JWT_SECRET: string;
   };
 }>();
 

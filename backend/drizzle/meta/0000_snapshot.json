@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "e3233294-0446-4207-9b40-1d6a5ea7fe93",
+  "id": "d02681d5-9634-4599-b43d-aef90fd49016",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "order_items": {
@@ -148,15 +148,88 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "product_details": {
+      "name": "product_details",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sizes": {
+          "name": "sizes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "key_ingredient": {
+          "name": "key_ingredient",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "how_to_use": {
+          "name": "how_to_use",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "benefits": {
+          "name": "benefits",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "photos": {
+          "name": "photos",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "product_details_product_id_unique": {
+          "name": "product_details_product_id_unique",
+          "columns": [
+            "product_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "products": {
       "name": "products",
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": true
         },
         "name": {
           "name": "name",
@@ -165,18 +238,46 @@
           "notNull": true,
           "autoincrement": false
         },
-        "description": {
-          "name": "description",
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "img": {
+          "name": "img",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "card_photo": {
+          "name": "card_photo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "price": {
+          "name": "price",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "skin_type": {
+          "name": "skin_type",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "price": {
-          "name": "price",
-          "type": "real",
+        "skin_concern": {
+          "name": "skin_concern",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "brand": {
@@ -192,42 +293,73 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        }
+      },
+      "indexes": {
+        "products_slug_unique": {
+          "name": "products_slug_unique",
+          "columns": [
+            "slug"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "reviews": {
+      "name": "reviews",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
         },
-        "image_url": {
-          "name": "image_url",
-          "type": "text",
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
-        "stock_quantity": {
-          "name": "stock_quantity",
+        "rating": {
+          "name": "rating",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": 0
+          "autoincrement": false
         },
-        "is_active": {
-          "name": "is_active",
-          "type": "integer",
+        "review": {
+          "name": "review",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": true
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
           "autoincrement": false
         }
       },
@@ -246,13 +378,6 @@
           "notNull": true,
           "autoincrement": false
         },
-        "email": {
-          "name": "email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
         "name": {
           "name": "name",
           "type": "text",
@@ -260,26 +385,78 @@
           "notNull": true,
           "autoincrement": false
         },
-        "password_hash": {
-          "name": "password_hash",
+        "email": {
+          "name": "email",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "created_at": {
-          "name": "created_at",
-          "type": "integer",
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "integer",
+        "address": {
+          "name": "address",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "zip": {
+          "name": "zip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'user'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
         }
       },
       "indexes": {

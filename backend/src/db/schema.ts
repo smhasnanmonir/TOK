@@ -3,45 +3,102 @@ import {
   text,
   integer,
   real,
-  blob,
+  primaryKey,
+  unique,
 } from "drizzle-orm/sqlite-core";
+import { relations, sql } from "drizzle-orm";
 
 // Users table
 export const users = sqliteTable("users", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  email: text("email").notNull().unique(),
+  id: text("id").primaryKey().notNull(),
   name: text("name").notNull(),
-  passwordHash: text("password_hash").notNull(),
-  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
-    () => new Date()
-  ),
-  updatedAt: integer("updated_at", { mode: "timestamp" }).$defaultFn(
-    () => new Date()
-  ),
+  email: text("email").notNull().unique(),
+  password: text("password").notNull(),
+  phone: text("phone"),
+  address: text("address"),
+  city: text("city"),
+  zip: text("zip"),
+  country: text("country"),
+  role: text("role").notNull().default("user"),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
 });
 
 // Products table
 export const products = sqliteTable("products", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+  id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
-  description: text("description"),
-  price: real("price").notNull(),
+  slug: text("slug").notNull().unique(),
+  img: text("img").notNull(),
+  card_photo: text("card_photo").notNull(),
+  price: text("price").notNull(),
+  skin_type: text("skin_type"),
+  skin_concern: text("skin_concern"),
   brand: text("brand").notNull(),
   category: text("category").notNull(),
-  imageUrl: text("image_url"),
-  stockQuantity: integer("stock_quantity").notNull().default(0),
-  isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
-  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
-    () => new Date()
-  ),
-  updatedAt: integer("updated_at", { mode: "timestamp" }).$defaultFn(
-    () => new Date()
-  ),
 });
+
+// ProductDetails table
+export const productDetails = sqliteTable("product_details", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  productId: integer("product_id").notNull().unique(),
+  sizes: text("sizes"),
+  description: text("description").notNull(),
+  key_ingredient: text("key_ingredient").notNull(),
+  how_to_use: text("how_to_use"),
+  benefits: text("benefits"),
+  photos: text("photos"),
+});
+
+// Reviews table
+export const reviews = sqliteTable("reviews", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  productId: integer("product_id").notNull(),
+  rating: integer("rating").notNull(),
+  review: text("review").notNull(),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+  user_id: text("user_id").notNull(),
+});
+
+// Relations (for Drizzle ORM, not enforced in SQLite)
+export const usersRelations = relations(users, ({ many }) => ({
+  reviews: many(reviews),
+}));
+
+export const productsRelations = relations(products, ({ many, one }) => ({
+  details: one(productDetails, {
+    fields: [products.id],
+    references: [productDetails.productId],
+  }),
+  reviews: many(reviews),
+}));
+
+export const productDetailsRelations = relations(productDetails, ({ one }) => ({
+  product: one(products, {
+    fields: [productDetails.productId],
+    references: [products.id],
+  }),
+}));
+
+export const reviewsRelations = relations(reviews, ({ one }) => ({
+  product: one(products, {
+    fields: [reviews.productId],
+    references: [products.id],
+  }),
+  user: one(users, {
+    fields: [reviews.user_id],
+    references: [users.id],
+  }),
+}));
 
 // Orders table
 export const orders = sqliteTable("orders", {

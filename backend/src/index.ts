@@ -2,9 +2,8 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { prettyJSON } from "hono/pretty-json";
-import auth from "./routes/auth";
-import productsRouter from "./routes/products";
-import ordersRouter from "./routes/orders";
+import { authRouter } from "./modules/auth/auth.router";
+import { shopByCategoryRouter } from "./modules/shopbycategory/sbc.router";
 
 const app = new Hono<{
   Bindings: {
@@ -22,6 +21,7 @@ app.use(
     origin: [
       "http://localhost:8787",
       "https://tok-backend.qbb5st7w6.workers.dev",
+      "https://backend.tokbd.shop",
     ],
     allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
@@ -40,9 +40,8 @@ app.get("/", (c) => {
 });
 
 // API routes
-app.route("/api/auth", auth);
-app.route("/api/products", productsRouter);
-app.route("/api/orders", ordersRouter);
+app.route("/api/auth", authRouter);
+app.route("/api/shop-by-category", shopByCategoryRouter);
 
 // 404 handler
 app.notFound((c) => {

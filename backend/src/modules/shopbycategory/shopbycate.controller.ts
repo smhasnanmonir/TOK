@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { shopByCategoryService } from "./sbc.services";
+import { shopByCategoryService } from "./shopbycate.services";
 
 const shopByCategoryFetchController = async (c: Context) => {
   const result = await shopByCategoryService.shopByCategoryFetchService(

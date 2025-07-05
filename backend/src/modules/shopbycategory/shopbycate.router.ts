@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { shopByCategoryController } from "./sbc.controller";
+import { shopByCategoryController } from "./shopbycate.controller";
 import { D1Database } from "@cloudflare/workers-types";
 
 // Router (auth-router.ts)

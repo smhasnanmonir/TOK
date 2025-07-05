@@ -140,6 +140,16 @@ export const shopByCategory = sqliteTable("shopByCategory", {
   ),
 });
 
+export const shopByConcern = sqliteTable("shopByConcern", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  img: text("img").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(
+    () => new Date()
+  ),
+});
+
 // Types for TypeScript
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;

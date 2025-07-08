@@ -30,7 +30,7 @@ const ShopByConcern = async () => {
                 src={concern.img}
                 alt={concern.name}
               />
-              <h1 className="text-center font-semibold text-xl pt-[12px]">
+              <h1 className="text-center text-[#E30B5D] font-semibold text-xl pt-[12px] font-poppins">
                 {concern.name}
               </h1>
             </div>

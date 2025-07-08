@@ -39,7 +39,7 @@ const ShopByTopBrand = () => {
               alt={brand.name}
               className="transition-all duration-500 ease-in-out transform origin-center block group-hover:grayscale-50"
             />
-            <div className="absolute inset-0 flex items-center justify-center text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity transition-colors duration-500 ease-in-out bg-opacity-50 group-hover:bg-[#FFD3D3] transform origin-center">
+            <div className="absolute inset-0 flex items-center justify-center text-white font-semibold opacity-0 group-hover:opacity-100 duration-500 ease-in-out bg-opacity-50 group-hover:bg-[#FFD3D3] transform origin-center">
               <ShoppingBagIcon size={24} color="#FB6F92" />
               <h1 className="block pl-2 underline decoration-2 decoration-pink-600 underline-offset-[10px] text-black">
                 Shop {brand.name}

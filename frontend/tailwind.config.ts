@@ -10,6 +10,9 @@ module.exports = {
       animation: {
         "fade-in": "fade-in 0.3s ease-out forwards",
       },
+      fontFamily: {
+        poppins: ["var(--font-poppins)", "sans-serif"],
+      },
     },
   },
 };

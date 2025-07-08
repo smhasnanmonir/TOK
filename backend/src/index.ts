@@ -3,7 +3,8 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { prettyJSON } from "hono/pretty-json";
 import { authRouter } from "./modules/auth/auth.router";
-import { shopByCategoryRouter } from "./modules/shopbycategory/sbc.router";
+import { shopByCategoryRouter } from "./modules/shopbycategory/shopbycate.router";
+import { shopByConcernRouter } from "./modules/shopbyconcern/shopbyconcern.router";
 
 const app = new Hono<{
   Bindings: {
@@ -42,6 +43,7 @@ app.get("/", (c) => {
 // API routes
 app.route("/api/auth", authRouter);
 app.route("/api/shop-by-category", shopByCategoryRouter);
+app.route("/api/shop-by-concern", shopByConcernRouter);
 
 // 404 handler
 app.notFound((c) => {

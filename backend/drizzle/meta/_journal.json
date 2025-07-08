@@ -15,6 +15,13 @@
       "when": 1751649439909,
       "tag": "0001_complex_white_tiger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1751968290603,
+      "tag": "0002_steady_mysterio",
+      "breakpoints": true
     }
   ]
 }

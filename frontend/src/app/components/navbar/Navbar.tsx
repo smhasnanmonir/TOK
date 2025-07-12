@@ -36,8 +36,8 @@ const Navbar = () => {
   return (
     <div>
       {/* Fixed Navbar */}
-      <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 bg-[#FFC2D1] shadow-md rounded-full px-6 py-3 flex items-center space-x-6 w-fit max-w-3xl mt-4 z-50 transition-all duration-300">
-        <ul className="flex space-x-5 text-black font-semibold">
+      <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 bg-[#FFC2D1] shadow-md rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 sm:space-x-6 w-fit max-w-[90vw] sm:max-w-3xl mt-4 z-50 transition-all duration-300">
+        <ul className="flex space-x-2 sm:space-x-5 text-black font-semibold text-sm sm:text-base">
           <Link className="block relative group" href={"/"}>
             Home
             <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
@@ -58,7 +58,7 @@ const Navbar = () => {
       </nav>
 
       {/* Search Box */}
-      <div className="fixed top-[80px] left-1/2 transform -translate-x-1/2 z-40">
+      <div className="fixed top-[60px] sm:top-[80px] left-1/2 transform -translate-x-1/2 z-40">
         <div
           ref={searchRef}
           className={`transition-all duration-300 transform ${
@@ -67,13 +67,16 @@ const Navbar = () => {
               : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
           }`}
         >
-          <div className="flex items-center gap-2 bg-white rounded-md shadow-md px-4 py-2 w-[300px]">
+          <div className="flex items-center gap-2 bg-white rounded-md shadow-md px-4 py-2 w-[280px] sm:w-[300px]">
             <input
-              className="flex-1 outline-none"
+              className="flex-1 outline-none text-sm sm:text-base"
               type="text"
               placeholder="Search..."
             />
-            <SearchIcon className="cursor-pointer" size={20} color="#000000" />
+            <SearchIcon
+              className="cursor-pointer w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]"
+              color="#000000"
+            />
           </div>
         </div>
       </div>

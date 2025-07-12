@@ -5,6 +5,7 @@ import { prettyJSON } from "hono/pretty-json";
 import { authRouter } from "./modules/auth/auth.router";
 import { shopByCategoryRouter } from "./modules/shopbycategory/shopbycate.router";
 import { shopByConcernRouter } from "./modules/shopbyconcern/shopbyconcern.router";
+import { shopByTypeRouter } from "./modules/shopbytype/shopbytype.router";
 
 const app = new Hono<{
   Bindings: {
@@ -44,6 +45,7 @@ app.get("/", (c) => {
 app.route("/api/auth", authRouter);
 app.route("/api/shop-by-category", shopByCategoryRouter);
 app.route("/api/shop-by-concern", shopByConcernRouter);
+app.route("/api/shop-by-type", shopByTypeRouter);
 
 // 404 handler
 app.notFound((c) => {

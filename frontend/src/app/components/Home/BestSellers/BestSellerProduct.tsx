@@ -9,7 +9,7 @@ const BestSellerProduct = () => {
           <h1 className="text-3xl font-semibold">Best Sellers</h1>
           <div className="w-1/4 h-0.5 bg-gray-200"></div>
         </div>
-        <div className="grid grid-cols-4 place-content-center gap-6">
+        <div className="grid md:grid-cols-4 grid-cols-2 place-content-center gap-6 px-[20px]">
           <div className="grid place-items-center space-y-4">
             <img
               className="aspect-square w-[220px] h-[220px] object-cover rounded-lg"

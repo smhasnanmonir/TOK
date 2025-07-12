@@ -95,7 +95,7 @@ const HeroSection = () => {
               src="https://i.ibb.co/9mnJgdfp/Main-Banner-PC-01.webp"
               alt=""
             />
-            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px]">
+            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px] px-[20px]">
               <h1 className="text-black text-4xl font-bold">
                 Be good to your skin.
               </h1>
@@ -113,7 +113,7 @@ const HeroSection = () => {
               src="https://i.ibb.co/nsbgFy1z/Main-Banner-PC-04-eaa3ac1a-8ad4-41ba-981f-44be50081064.webp"
               alt=""
             />
-            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px]">
+            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px] px-[20px]">
               <h1 className="text-black text-4xl font-bold">
                 Get Anua Rice 70+ Ceramide at 35% Discount
               </h1>
@@ -130,7 +130,7 @@ const HeroSection = () => {
               src="https://i.ibb.co/LzCKfFbv/Main-Banner-PC-03.webp"
               alt=""
             />
-            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px]">
+            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px] px-[20px]    ">
               <h1 className="text-black text-4xl font-bold">
                 Expiry Date till 2028!!
               </h1>

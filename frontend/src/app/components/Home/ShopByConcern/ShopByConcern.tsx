@@ -15,7 +15,7 @@ const ShopByConcern = async () => {
     <div className="w-full py-[20px]">
       <div className="flex gap-2 items-center justify-center pb-[20px] px-[20px]">
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
-        <h1 className="md:text-3xl text-xl font-semibold font-poppins">
+        <h1 className="md:text-3xl text-[16px] font-semibold font-poppins">
           Shop By Concern
         </h1>
         <div className="w-1/4 h-0.5 bg-gray-200"></div>

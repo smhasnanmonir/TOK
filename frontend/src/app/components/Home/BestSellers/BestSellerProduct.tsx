@@ -6,7 +6,9 @@ const BestSellerProduct = () => {
       <div>
         <div className=" flex gap-2 items-center justify-center">
           <div className="w-1/4 h-0.5 bg-gray-200"></div>
-          <h1 className="text-3xl font-semibold">Best Sellers</h1>
+          <h1 className="md:text-3xl text-[16px] font-semibold">
+            Best Sellers
+          </h1>
           <div className="w-1/4 h-0.5 bg-gray-200"></div>
         </div>
         <div className="grid md:grid-cols-4 grid-cols-2 place-content-center gap-6 px-[20px]">

@@ -15,14 +15,16 @@ const ShopByCategory = async () => {
     <div className="mx-auto w-full px-[20px]">
       <div className="flex gap-2 items-center justify-center pb-[20px]">
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
-        <h1 className="md:text-3xl text-xl font-semibold">Shop By Category</h1>
+        <h1 className="md:text-3xl text-[16px] font-semibold">
+          Shop By Category
+        </h1>
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
       </div>
       <div className="grid md:grid-cols-8 grid-cols-2 place-items-center gap-[16px] ">
         {categories?.result.map(
           (category: { id: number; name: string; img: string }) => (
             <div
-              className=" rounded-md p-[16px] cursor-pointer border-[2px] border-gray-200/20 inset-shadow-indigo-500/50"
+              className=" rounded-md p-[16px] cursor-pointer border-[2px] border-gray-200/20 inset-shadow-indigo-500/50 hover:border-pink-200 transition-all duration-300"
               key={category.id}
             >
               <img

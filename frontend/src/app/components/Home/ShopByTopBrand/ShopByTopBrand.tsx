@@ -25,14 +25,14 @@ const ShopByTopBrand = () => {
     <div className="pb-[40px] px-[24px]">
       <div className=" flex gap-2 items-center justify-center">
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
-        <h1 className="md:text-3xl text-xl font-semibold">Shop By Brand</h1>
+        <h1 className="md:text-3xl text-[16px] font-semibold">Shop By Brand</h1>
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
       </div>
       <div className="grid md:grid-cols-4 grid-cols-2 gap-4 pt-[32px]">
         {brandLogos.map((brand) => (
           <div
             key={brand.name}
-            className="overflow-hidden cursor-pointer relative group transition-all duration-500 ease-in-out transform origin-center"
+            className="overflow-hidden cursor-pointer relative group transition-all duration-500 ease-in-out transform origin-center hover:border-pink-200"
           >
             <img
               src={brand.src.src}

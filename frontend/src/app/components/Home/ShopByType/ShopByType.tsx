@@ -15,7 +15,7 @@ const ShopByType = async () => {
     <div className="mx-auto w-full px-[20px] py-[20px]">
       <div className="flex gap-2 items-center justify-center pb-[20px]">
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
-        <h1 className="md:text-3xl text-xl font-semibold">Shop By Concern</h1>
+        <h1 className="md:text-3xl text-[16px] font-semibold">Shop By Type</h1>
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
       </div>
       <div className="grid md:grid-cols-6 grid-cols-2 place-items-center gap-[16px] ">
@@ -30,7 +30,7 @@ const ShopByType = async () => {
                 src={concern.img}
                 alt={concern.name}
               />
-              <h1 className="text-center text-[#E30B5D] font-semibold text-[16px] pt-[12px] font-poppins">
+              <h1 className="text-center text-[#E30B5D] font-semibold text-[12px] pt-[12px] font-poppins">
                 {concern.name}
               </h1>
             </div>

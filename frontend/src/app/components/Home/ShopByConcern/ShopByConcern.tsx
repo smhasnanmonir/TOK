@@ -12,13 +12,13 @@ const ShopByConcern = async () => {
   const concern = await data.json();
 
   return (
-    <div className="mx-auto w-full px-[20px] py-[20px]">
-      <div className="flex gap-2 items-center justify-center pb-[20px]">
+    <div className="w-full py-[20px]">
+      <div className="flex gap-2 items-center justify-center pb-[20px] px-[20px]">
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
         <h1 className="text-3xl font-semibold">Shop By Concern</h1>
         <div className="w-1/4 h-0.5 bg-gray-200"></div>
       </div>
-      <div className="grid md:grid-cols-5 grid-cols-2 place-items-center gap-[16px] ">
+      <div className="grid md:grid-cols-6 grid-cols-2 place-items-center gap-[16px] px-[20px]">
         {concern?.result.map(
           (concern: { id: number; name: string; img: string }) => (
             <div
@@ -30,7 +30,7 @@ const ShopByConcern = async () => {
                 src={concern.img}
                 alt={concern.name}
               />
-              <h1 className="text-center text-[#E30B5D] font-semibold text-xl pt-[12px] font-poppins">
+              <h1 className="text-center text-[#E30B5D] font-semibold text-[12px] pt-[12px] font-poppins">
                 {concern.name}
               </h1>
             </div>

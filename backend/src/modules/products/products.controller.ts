@@ -10,21 +10,23 @@ const productsFetchController = async (c: Context) => {
 };
 
 const productsPostController = async (c: Context) => {
-  const { productProps, detailProps } = await c.req.json();
+  //   console.log("Router hit!!!");
+  const { products, productDetails } = await c.req.json();
+  //   console.log(products, productDetails);
   try {
     const result = await productsService.productsPostService(
       c.env.DB,
-      productProps,
-      detailProps
+      products,
+      productDetails
     );
     return c.json({
       message: "Product Posted!",
       result: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     return c.json({
       message: "Something went wrong!",
-      error: error,
+      error: error.message,
     });
   }
 };

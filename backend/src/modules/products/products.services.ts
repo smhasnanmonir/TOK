@@ -12,36 +12,54 @@ const productsPostService = async (
   productProps: typeof products.$inferInsert,
   detailProps: typeof productDetails.$inferInsert
 ) => {
-  const drizzleDB = createDB(db);
+  console.log("Service hit!!!!!!!!!!");
+  console.log(productProps, detailProps);
 
-  const result = await drizzleDB.transaction(async (tx: any) => {
-    const productResult = await tx
-      .insert(products)
-      .values({
-        name: productProps.name,
-        slug: productProps.slug,
-        img: productProps.img,
-        brand: productProps.brand,
-        card_photo: productProps.card_photo,
-        price: productProps.price,
-        category: productProps.category,
-        skin_type: productProps.skin_type,
-        skin_concern: productProps.skin_concern,
-        stock: productProps.stock,
-      })
-      .returning();
-    const detailResult = await tx.insert(productDetails).values({
-      productId: productResult[0].id,
-      sizes: detailProps.sizes,
-      description: detailProps.description,
-      key_ingredient: detailProps.key_ingredient,
-      how_to_use: detailProps.how_to_use,
-      benefits: detailProps.benefits,
-      photos: detailProps.photos,
-    });
-    return { productResult, detailResult };
-  });
-  return result;
+  // Convert arrays to JSON strings for D1 compatibility
+  const howToUseJson = JSON.stringify(detailProps.how_to_use);
+  const benefitsJson = JSON.stringify(detailProps.benefits);
+  const photosJson = JSON.stringify(detailProps.photos);
+
+  // Use batch for true transaction behavior
+  const results = await db.batch([
+    db
+      .prepare(
+        `
+      INSERT INTO products (name, slug, img, brand, card_photo, price, category, skin_type, skin_concern, in_stock)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `
+      )
+      .bind(
+        productProps.name,
+        productProps.slug,
+        productProps.img,
+        productProps.brand,
+        productProps.card_photo,
+        productProps.price,
+        productProps.category,
+        productProps.skin_type,
+        productProps.skin_concern,
+        productProps.stock
+      ),
+    db
+      .prepare(
+        `
+      INSERT INTO product_details (product_id, sizes, description, key_ingredient, how_to_use, benefits, photos)
+      VALUES (last_insert_rowid(), ?, ?, ?, ?, ?, ?)
+    `
+      )
+      .bind(
+        detailProps.sizes,
+        detailProps.description,
+        detailProps.key_ingredient,
+        howToUseJson,
+        benefitsJson,
+        photosJson
+      ),
+  ]);
+
+  const productId = results[0].meta.last_row_id;
+  return { productResult: { id: productId }, detailResult: results[1] };
 };
 
 export const productsService = {

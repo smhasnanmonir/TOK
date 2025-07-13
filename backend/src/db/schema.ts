@@ -43,8 +43,8 @@ export const productDetails = sqliteTable("product_details", {
   sizes: text("sizes"),
   description: text("description").notNull(),
   key_ingredient: text("key_ingredient").notNull(),
-  how_to_use: text("how_to_use"),
-  benefits: text("benefits"),
+  how_to_use: text("how_to_use").$type<string[]>(),
+  benefits: text("benefits").$type<string[]>(),
   photos: text("photos").$type<string[]>(),
 });
 

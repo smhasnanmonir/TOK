@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { D1Database } from "@cloudflare/workers-types";
+import { productsController } from "./products.controller";
 
 // Router (auth-router.ts)
 export const productsRouter = new Hono<{
@@ -7,3 +8,6 @@ export const productsRouter = new Hono<{
     DB: D1Database;
   };
 }>();
+
+productsRouter.get("/fetch", productsController.productsFetchController);
+productsRouter.post("/post", productsController.productsPostController);

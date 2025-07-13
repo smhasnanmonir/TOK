@@ -20,8 +20,12 @@ const productsPostController = async (c: Context) => {
       productDetails
     );
     return c.json({
+      success: true,
       message: "Product Posted!",
-      result: result,
+      result: {
+        "Product Result": result.productResult,
+        "Product Details Result": result.detailResult.success,
+      },
     });
   } catch (error: any) {
     return c.json({

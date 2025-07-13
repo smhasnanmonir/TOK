@@ -3,7 +3,11 @@ import { D1Database } from "@cloudflare/workers-types";
 
 const productsFetchService = async (db: D1Database) => {
   const drizzleDB = createDB(db);
-  const result = await drizzleDB.select().from(products);
+  const result = await drizzleDB.query.products.findMany({
+    with: {
+      details: true,
+    },
+  });
   return result;
 };
 

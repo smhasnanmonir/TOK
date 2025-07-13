@@ -8,6 +8,7 @@ import missha from "../../../asset/TopBrandLogo/MISSHA.jpg";
 import mixsoon from "../../../asset/TopBrandLogo/Mixsoon.jpg";
 import purito from "../../../asset/TopBrandLogo/Purito.jpg";
 import { ShoppingBagIcon } from "lucide-react";
+import ShopBy from "../../shared/ShopBy/ShopBy";
 
 const ShopByTopBrand = () => {
   const brandLogos = [
@@ -22,13 +23,9 @@ const ShopByTopBrand = () => {
   ];
 
   return (
-    <div className="pb-[40px] px-[24px]">
-      <div className=" flex gap-2 items-center justify-center">
-        <div className="w-1/4 h-0.5 bg-gray-200"></div>
-        <h1 className="md:text-3xl text-[16px] font-semibold">Shop By Brand</h1>
-        <div className="w-1/4 h-0.5 bg-gray-200"></div>
-      </div>
-      <div className="grid md:grid-cols-4 grid-cols-2 gap-4 pt-[32px]">
+    <div className="px-[24px]">
+      <ShopBy title="Shop By Brand"></ShopBy>
+      <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
         {brandLogos.map((brand) => (
           <div
             key={brand.name}

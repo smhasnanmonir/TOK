@@ -8,6 +8,17 @@ const productsFetchController = async (c: Context) => {
     result: result,
   });
 };
+const singleProductFetchController = async (c: Context) => {
+  const slug = c.req.param("slug");
+  const result = await productsService.singleProductFetchService(
+    c.env.DB,
+    slug
+  );
+  return c.json({
+    message: "Product fetched",
+    result: result,
+  });
+};
 
 const productsPostController = async (c: Context) => {
   //   console.log("Router hit!!!");
@@ -38,4 +49,5 @@ const productsPostController = async (c: Context) => {
 export const productsController = {
   productsFetchController,
   productsPostController,
+  singleProductFetchController,
 };

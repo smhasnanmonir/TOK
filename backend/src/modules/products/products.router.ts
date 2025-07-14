@@ -11,3 +11,7 @@ export const productsRouter = new Hono<{
 
 productsRouter.get("/fetch", productsController.productsFetchController);
 productsRouter.post("/post", productsController.productsPostController);
+productsRouter.get(
+  "/fetch/:slug",
+  productsController.singleProductFetchController
+);

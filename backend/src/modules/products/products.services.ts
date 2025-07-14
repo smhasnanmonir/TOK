@@ -11,12 +11,22 @@ const productsFetchService = async (db: D1Database) => {
   return result;
 };
 
+const singleProductFetchService = async (db: D1Database, slug: string) => {
+  const drizzleDB = createDB(db);
+  const result = await drizzleDB.query.products.findFirst({
+    where: (products, { eq }) => eq(products.slug, slug),
+    with: {
+      details: true,
+    },
+  });
+  return result;
+};
+
 const productsPostService = async (
   db: D1Database,
   productProps: typeof products.$inferInsert,
   detailProps: typeof productDetails.$inferInsert
 ) => {
-  console.log("Service hit!!!!!!!!!!");
   console.log(productProps, detailProps);
 
   // Convert arrays to JSON strings for D1 compatibility
@@ -69,4 +79,5 @@ const productsPostService = async (
 export const productsService = {
   productsFetchService,
   productsPostService,
+  singleProductFetchService,
 };

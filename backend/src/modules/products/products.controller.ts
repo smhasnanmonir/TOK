@@ -8,11 +8,24 @@ const productsFetchController = async (c: Context) => {
     result: result,
   });
 };
+
 const singleProductFetchController = async (c: Context) => {
   const slug = c.req.param("slug");
   const result = await productsService.singleProductFetchService(
     c.env.DB,
     slug
+  );
+  return c.json({
+    message: "Product fetched",
+    result: result,
+  });
+};
+
+const productsFetchByNameController = async (c: Context) => {
+  const name = c.req.param("name");
+  const result = await productsService.productsFetchByNameService(
+    c.env.DB,
+    name
   );
   return c.json({
     message: "Product fetched",
@@ -50,4 +63,5 @@ export const productsController = {
   productsFetchController,
   productsPostController,
   singleProductFetchController,
+  productsFetchByNameController,
 };

@@ -22,6 +22,14 @@ const singleProductFetchService = async (db: D1Database, slug: string) => {
   return result;
 };
 
+const productsFetchByNameService = async (db: D1Database, name: string) => {
+  const drizzleDB = createDB(db);
+  const result = await drizzleDB.query.products.findMany({
+    where: (products, { eq }) => eq(products.name, name),
+  });
+  return result;
+};
+
 const productsPostService = async (
   db: D1Database,
   productProps: typeof products.$inferInsert,
@@ -80,4 +88,5 @@ export const productsService = {
   productsFetchService,
   productsPostService,
   singleProductFetchService,
+  productsFetchByNameService,
 };

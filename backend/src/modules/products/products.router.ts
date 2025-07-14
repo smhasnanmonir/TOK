@@ -15,3 +15,8 @@ productsRouter.get(
   "/fetch/:slug",
   productsController.singleProductFetchController
 );
+
+productsRouter.get(
+  "/search/:name",
+  productsController.singleProductFetchController
+);

@@ -12,7 +12,7 @@ const BestSellerProduct = async () => {
   });
   const products = await data.json();
   return (
-    <div className="">
+    <div className="md:px-[20px]">
       <div>
         <ShopBy title="Best Sellers"></ShopBy>
         <div className="grid md:grid-cols-4 grid-cols-2 md:gap-6 gap-4 px-[10px]">

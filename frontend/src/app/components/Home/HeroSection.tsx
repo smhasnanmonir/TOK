@@ -110,23 +110,6 @@ const HeroSection = () => {
           <SwiperSlide>
             <img
               className="w-screen h-[450px] md:h-[400px] object-cover relative"
-              src="https://i.ibb.co/nsbgFy1z/Main-Banner-PC-04-eaa3ac1a-8ad4-41ba-981f-44be50081064.webp"
-              alt=""
-            />
-            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px] px-[20px]">
-              <h1 className="text-black text-4xl font-bold">
-                Get Anua Rice 70+ Ceramide at 35% Discount
-              </h1>
-              <p className="text-black text-xl font-semibold">Grab it now!</p>
-
-              <button className="bg-pink-500 text-white cursor-pointer hover:bg-pink-600 transition-all ease-linear duration-300 px-4 py-2 rounded-md w-[175px] h-[50px] flex items-center justify-center">
-                <span className="text-[16px] font-semibold">Shop Now</span>
-              </button>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              className="w-screen h-[450px] md:h-[400px] object-cover relative"
               src="https://i.ibb.co/LzCKfFbv/Main-Banner-PC-03.webp"
               alt=""
             />

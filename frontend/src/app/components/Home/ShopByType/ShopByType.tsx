@@ -1,4 +1,4 @@
-import Card from "../../shared/Card/Card";
+import Card from "../../shared/Cards/TypeCard";
 import ShopBy from "../../shared/ShopBy/ShopBy";
 
 /* eslint-disable @next/next/no-img-element */

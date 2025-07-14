@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-const Card = ({
+const TypeCard = ({
   props,
 }: {
   props: { id: number; name: string; img: string };
@@ -19,4 +19,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default TypeCard;

@@ -15,7 +15,7 @@ const BestSellerProduct = async () => {
     <div className="">
       <div>
         <ShopBy title="Best Sellers"></ShopBy>
-        <div className="grid md:grid-cols-4 grid-cols-2 md:gap-6 gap-4 px-[20px]">
+        <div className="grid md:grid-cols-4 grid-cols-2 md:gap-6 gap-4 px-[10px]">
           {products?.result.map(
             (product: {
               id: number;

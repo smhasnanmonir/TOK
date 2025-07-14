@@ -25,7 +25,7 @@ const ProductCard = ({
           {name}
         </h1>
         <p className="font-medium text-gray-700 text-left">{price} Taka</p>
-        <div className="md:flex gap-1.5 items-center justify-center">
+        <div className="md:flex gap-1.5 items-center justify-center space-y-2">
           {/* Button Div to make them side by side */}
 
           {/* Add to Cart Button */}

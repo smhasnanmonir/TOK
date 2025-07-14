@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <div>
       {/* Fixed Navbar */}
-      <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 bg-[#FFC2D1] shadow-md rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 sm:space-x-6 w-fit max-w-[90vw] sm:max-w-3xl mt-4 z-50 transition-all duration-300">
+      <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 bg-[#FFC2D1] shadow-md rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 sm:space-x-6 w-fit max-w-[90vw] mt-2 sm:max-w-3xl z-50 transition-all duration-300">
         <ul className="flex space-x-2 sm:space-x-5 text-black font-semibold text-sm sm:text-base">
           <Link className="block relative group" href={"/"}>
             Home

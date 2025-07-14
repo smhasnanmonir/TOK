@@ -23,6 +23,7 @@ const singleProductFetchController = async (c: Context) => {
 
 const productsFetchByNameController = async (c: Context) => {
   const name = c.req.param("name");
+  console.log(name);
   const result = await productsService.productsFetchByNameService(
     c.env.DB,
     name

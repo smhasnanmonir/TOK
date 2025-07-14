@@ -25,7 +25,7 @@ const singleProductFetchService = async (db: D1Database, slug: string) => {
 const productsFetchByNameService = async (db: D1Database, name: string) => {
   const drizzleDB = createDB(db);
   const result = await drizzleDB.query.products.findMany({
-    where: (products, { eq }) => eq(products.name, name),
+    where: (products, { like }) => like(products.name, `%${name}%`),
   });
   return result;
 };

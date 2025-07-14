@@ -18,5 +18,5 @@ productsRouter.get(
 
 productsRouter.get(
   "/search/:name",
-  productsController.singleProductFetchController
+  productsController.productsFetchByNameController
 );

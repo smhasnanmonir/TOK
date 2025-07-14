@@ -1164,7 +1164,8 @@
   {
     "name": "Klairs Midnight Blue Calming Cream 60 ml",
     "slug": "klairs-midnight-blue-calming-cream-60ml",
-    "image_url": "https://res.cloudinary.com/dkh8mdtme/image/upload/v1743581830/vsoh5slpjvt7is03hjrt.jpg",
+    "img": "https://cdn.tokbd.shop/Products/klaris%20midnight%20pink.png",
+    "card_photo": "https://cdn.tokbd.shop/Products/klaris%20midnight%20transparent.png",
     "price": 2200,
 
     "brand": "Klairs",

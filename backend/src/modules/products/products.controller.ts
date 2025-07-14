@@ -23,14 +23,20 @@ const singleProductFetchController = async (c: Context) => {
 
 const productsFetchByNameController = async (c: Context) => {
   const name = c.req.param("name");
+  const page = parseInt(c.req.query("page") || "1", 10);
+  const pageSize = parseInt(c.req.query("pageSize") || "10", 10);
   console.log(name);
   const result = await productsService.productsFetchByNameService(
     c.env.DB,
-    name
+    name,
+    page,
+    pageSize
   );
   return c.json({
     message: "Product fetched",
     result: result,
+    page: page,
+    pageSize: pageSize,
   });
 };
 

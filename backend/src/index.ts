@@ -22,9 +22,10 @@ app.use(
   "*",
   cors({
     origin: [
-      "http://localhost:8787",
+      "http://localhost:3000",
       "https://tok-backend.qbb5st7w6.workers.dev",
       "https://backend.tokbd.shop",
+      "https://tok-demo.vercel.app",
     ],
     allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],

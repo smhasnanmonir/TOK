@@ -36,41 +36,6 @@ const HeroSection = () => {
           transform: scale(1.1);
         }
       `}</style>
-      {/* <div className="grid place-content-center space-y-[32px]">
-        <h1 className="text-3xl md:text-4xl text-center text-black font-semibold">
-          Be good to your skin.
-        </h1>
-        <p className="text-sm md:text-base text-center text-gray-600 font-medium">
-          Get 100% Original{" "}
-          <span className="underline decoration-pink-500 underline-offset-2 decoration-2">
-            Hand Picked
-          </span>{" "}
-          Skincare products from Korea!
-        </p>
-        <div className="flex gap-[24px]">
-          <div className="grid  justify-items-center border-2 p-4 rounded-2xl border-gray-200 inset-shadow-sm inset-shadow-pink-100 hover:inset-shadow-pink-300 transition-all ease-linear duration-300 cursor-pointer">
-            <ShipIcon size={34} color="#FB6F92" />
-            <p>Imported from Korea</p>
-          </div>
-          <div className="grid  justify-items-center border-2 p-4 rounded-2xl border-gray-200 inset-shadow-sm inset-shadow-pink-100 hover:inset-shadow-pink-300 transition-all ease-linear duration-300 cursor-pointer">
-            <Clock7Icon size={34} color="#FB6F92" />
-            <p>24/7 Human Support</p>
-          </div>
-          <div className="grid  justify-items-center border-2 p-4 rounded-2xl border-gray-200 inset-shadow-sm inset-shadow-pink-100 hover:inset-shadow-pink-300 transition-all ease-linear duration-300 cursor-pointer">
-            <HandCoinsIcon size={34} color="#FB6F92" />
-            <p>Cash on Delivery</p>
-          </div>
-        </div>
-        <div className="flex items-center justify-center">
-          <a
-            href="#_"
-            className="relative rounded px-5 py-2.5 overflow-hidden group bg-pink-500 hover:bg-gradient-to-r hover:from-pink-500 hover:to-pink-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-pink-400 transition-all ease-out duration-300"
-          >
-            <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-            <span className="relative font-semibold">Browser Products</span>
-          </a>
-        </div>
-      </div> */}
       <div className="">
         <Swiper
           modules={[Autoplay, Pagination, EffectFade, Zoom]}

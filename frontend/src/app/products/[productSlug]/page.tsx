@@ -1,4 +1,5 @@
-// import { ArrowRight } from "lucide-react";
+import AddToCartButton from "@/app/components/shared/Button/AddToCartButton";
+import BuyNowButton from "@/app/components/shared/Button/BuyNowButton";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -36,75 +37,72 @@ const ProductDetails = async ({
   }
 
   const parsedSizeArray: number[] = JSON.parse(product?.result?.details?.sizes);
-  console.log(parsedSizeArray);
+  const skinConcernArray: string[] = product?.result?.skin_concern.split(",");
 
   return (
-    <div className="md:pt-[96px] pt-[54px] max-w-7xl mx-auto">
-      {/* <div className="bg-[#de31629d] p-4 h-[140px] flex items-center">
-        <div className="pt-[48px] grid place-items-center w-full">
-          <h1 className="text-white text-2xl font-bold">Product Details</h1>
-          <div className="flex items-center gap-2 pt-[8px] text-white font-semibold">
-            <h1>Home</h1>
-            <ArrowRight />
-            <h1>Products</h1>
-            <ArrowRight />
-            <h1>{product?.result?.name}</h1>
-          </div>
-        </div>
-      </div> */}
-      <div className="mx-auto px-[4%] grid grid-cols-2 gap-4 justify-start">
-        <div>
+    <div className="md:pt-[96px] pt-[54px] max-w-7xl mx-auto overflow-hidden">
+      <div className="mx-auto px-[4%] grid grid-cols-2 gap-4 items-stretch ">
+        <div className="h-full">
           <img
             className="w-[550px] h-full object-cover rounded-md"
             src={product?.result?.img}
             alt={product?.result?.name}
           />
         </div>
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-col space-y-2">
-            <h1 className="text-2xl font-semibold">{product?.result?.name}</h1>
-            <p className="text-xl text-[#DE3163] font-semibold">
-              ৳ {product?.result?.price}{" "}
-              <span className="line-through text-gray-400 text-sm">
-                {Number(product?.result?.price) + 200}{" "}
-              </span>
-            </p>
-            <h1 className="text-[18px]">
-              {" "}
-              <span className="font-semibold">Brand:</span>{" "}
-              {product?.result?.brand}
-            </h1>
-            <h1 className="text-[18px]">
-              {" "}
-              <span className="font-semibold">Origin: </span>South Korea
-            </h1>
-            <h1 className="text-[18px]">
-              <span className="font-semibold">Category: </span>{" "}
-              {product?.result?.category}
-            </h1>
-            <h1 className={`text-[18px] $`}>
-              <span className="font-semibold">Status: </span>{" "}
-              <span
-                className={
-                  product?.result?.stock ? "text-green-400" : "text-red-400"
-                }
+        <div className="flex flex-col space-y-[24px]">
+          <h1 className="text-2xl font-semibold">{product?.result?.name}</h1>
+          <p className="text-xl text-[#DE3163] font-semibold">
+            ৳ {product?.result?.price}{" "}
+            <span className="line-through text-gray-400 text-sm">
+              {Number(product?.result?.price) + 200}{" "}
+            </span>
+          </p>
+          <h1 className="text-[17px]">
+            <span className="font-semibold">Brand : </span>
+            <span className="font-extrabold">{product?.result?.brand}</span>
+          </h1>
+          <h1 className="text-[16px] text-gray w-3/4">
+            {product?.result?.details?.description}
+          </h1>
+          <h1 className={`text-[17px] $`}>
+            <span className="font-semibold">Status: </span>{" "}
+            <span
+              className={` ${
+                product?.result?.stock ? "text-green-400" : "text-red-400"
+              }`}
+            >
+              {product?.result?.stock ? "In Stock" : "Out of Stock"}
+            </span>
+          </h1>
+          <div className="flex flex-wrap gap-2">
+            {skinConcernArray?.map((concern: string) => (
+              <button
+                className="font-semibold text-center text-sm px-[12px] py-[4px] border border-gray-200"
+                key={concern}
               >
-                {product?.result?.stock ? "In Stock" : "Out of Stock"}
-              </span>
-            </h1>
+                {concern}
+              </button>
+            ))}
           </div>
-          <div className="flex flex-col space-y-2">
-            <h1>Size/Volume</h1>
-            <div className="flex flex-wrap gap-2">
-              {parsedSizeArray?.map((size: number) => (
-                <button
-                  className="bg-[#DE3163] cursor-pointer font-semibold text-center rounded-full text-xl px-[18px] py-[4px] text-white"
-                  key={size}
-                >
-                  {size} ml
-                </button>
-              ))}
-            </div>
+          <h1>
+            <span className="font-semibold text-[17px]">Skin Type : </span>
+            <span className="">{product?.result?.skin_type}</span>
+          </h1>
+          <div className="w-full h-[0.5px] bg-gray-200"></div>
+
+          <div className="flex flex-wrap gap-2">
+            {parsedSizeArray?.map((size: number) => (
+              <button
+                className=" cursor-pointer font-semibold text-center text-xl px-[18px] py-[4px] border border-gray-200"
+                key={size}
+              >
+                {size} ml
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <AddToCartButton></AddToCartButton>
+            <BuyNowButton></BuyNowButton>
           </div>
         </div>
       </div>

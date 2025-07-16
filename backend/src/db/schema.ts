@@ -40,7 +40,7 @@ export const products = sqliteTable("products", {
 export const productDetails = sqliteTable("product_details", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   productId: integer("product_id").notNull().unique(),
-  sizes: text("sizes"),
+  sizes: integer("sizes").$type<number[]>().notNull(),
   description: text("description").notNull(),
   key_ingredient: text("key_ingredient").notNull(),
   how_to_use: text("how_to_use").$type<string[]>(),

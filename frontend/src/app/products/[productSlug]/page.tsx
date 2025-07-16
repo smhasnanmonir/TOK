@@ -1,3 +1,4 @@
+import ProductTabs from "@/app/components/ProductComponents/ProductTabs";
 import AddToCartButton from "@/app/components/shared/Button/AddToCartButton";
 import BuyNowButton from "@/app/components/shared/Button/BuyNowButton";
 
@@ -40,7 +41,7 @@ const ProductDetails = async ({
   const skinConcernArray: string[] = product?.result?.skin_concern.split(",");
 
   return (
-    <div className="md:pt-[96px] pt-[54px] max-w-7xl mx-auto overflow-hidden">
+    <div className="md:pt-[96px] pt-[54px] max-w-7xl mx-auto overflow-hidden mb-[50px]">
       <div className="mx-auto px-[4%] grid grid-cols-2 gap-4 items-stretch ">
         <div className="h-full">
           <img
@@ -100,11 +101,14 @@ const ProductDetails = async ({
               </button>
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-1/2">
             <AddToCartButton></AddToCartButton>
             <BuyNowButton></BuyNowButton>
           </div>
         </div>
+      </div>
+      <div className="my-[24px] w-full grid place-content-center">
+        <ProductTabs product={product}></ProductTabs>
       </div>
     </div>
   );

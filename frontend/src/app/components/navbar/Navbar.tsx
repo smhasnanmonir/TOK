@@ -4,6 +4,7 @@ import { SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import NavSearch from "./NavSearch";
+import { usePathname } from "next/navigation";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -15,6 +16,12 @@ const Navbar = () => {
   const toggleSearch = () => {
     setOpen((prev) => !prev);
   };
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    console.log("Current client-side path:", pathname);
+  }, [pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -61,8 +68,10 @@ const Navbar = () => {
     <div className="block">
       {/* Fixed Navbar */}
       <nav
-        className={`bg-white/10 inset-shadow-indigo-500/35 fixed top-0 left-1/2 transform -translate-x-1/2 backdrop-blur-[12px] border-[1px] border-pink-400/35 shadow-pink-400/35 rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 sm:space-x-6 w-fit max-w-[90vw] md:mt-4 mt-2 sm:max-w-3xl z-50 transition-all duration-300 ease-linear ${
+        className={`inset-shadow-indigo-500/35 fixed top-0 left-1/2 transform -translate-x-1/2 backdrop-blur-[12px] border-[1px] border-pink-400/35 shadow-pink-400/35 rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 sm:space-x-6 w-fit max-w-[90vw] md:mt-4 mt-2 sm:max-w-3xl z-50 transition-all duration-300 ease-linear ${
           open ? "scale-120 md:scale-100" : "scale-100"
+        } ${
+          pathname.startsWith("/products") ? "bg-pink-400/10" : "bg-white/10 "
         }`}
       >
         <ul className="flex space-x-2 sm:space-x-5 text-black font-semibold text-sm sm:text-base">

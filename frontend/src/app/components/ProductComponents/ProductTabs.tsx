@@ -8,7 +8,7 @@ const ProductTabs = ({ product }: { product: any }) => {
   const benefits = JSON.parse(product?.result?.details?.benefits);
   //   const reviews = JSON.parse(product?.result?.details?.reviews);
   return (
-    <div className="flex w-full max-w-sm flex-col gap-6">
+    <div className="">
       <Tabs defaultValue="account">
         <TabsList>
           <TabsTrigger value="account">How To Use</TabsTrigger>
@@ -17,7 +17,7 @@ const ProductTabs = ({ product }: { product: any }) => {
           <TabsTrigger value="reviews">Reviews</TabsTrigger>
         </TabsList>
         <TabsContent value="account">
-          <Card className="p-4 w-full min-h[40px] block">
+          <Card className="p-4 h-[220px] block transition-all duration-300">
             <div>
               {howToUse.map((item: any, i: number) => (
                 <div className="flex flex-col " key={i + 10}>
@@ -30,7 +30,7 @@ const ProductTabs = ({ product }: { product: any }) => {
           </Card>
         </TabsContent>
         <TabsContent value="benefits">
-          <Card className="p-4 w-full min-h[40px] block">
+          <Card className="p-4 h-[220px] block transition-all duration-300">
             <div className="">
               {benefits.map((item: any, i: number) => (
                 <div key={i + 20}>
@@ -43,12 +43,14 @@ const ProductTabs = ({ product }: { product: any }) => {
           </Card>
         </TabsContent>
         <TabsContent value="key-ingredients">
-          <Card className="p-4 w-full min-h[40px] block">
+          <Card className="p-4 h-[220px] block transition-all duration-300">
             <div className="">{product?.result?.details?.key_ingredient}</div>
           </Card>
         </TabsContent>
         <TabsContent value="reviews">
-          <Card></Card>
+          <Card className="h-[220px] transition-all duration-300 p-4">
+            <h1>No reviews yet</h1>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>

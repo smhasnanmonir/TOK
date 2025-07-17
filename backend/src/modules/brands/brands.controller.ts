@@ -4,7 +4,7 @@ import { brandService } from "./brands.services";
 const brandFetchController = async (c: Context) => {
   const result = await brandService.brandFetchService(c.env.DB);
   return c.json({
-    message: "shop by Concern fetched",
+    message: "Brand fetched",
     result: result,
   });
 };
@@ -18,7 +18,7 @@ const brandPostController = async (c: Context) => {
       img,
     });
     return c.json({
-      message: "shop by Concern Posted!",
+      message: "Brand Posted!",
       result: result,
     });
   } catch (error) {

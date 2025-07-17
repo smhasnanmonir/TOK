@@ -1,10 +1,11 @@
 import { createDB } from "../../db";
 import { brands } from "../../db/schema";
 import { D1Database } from "@cloudflare/workers-types";
+import { asc } from "drizzle-orm";
 
 const brandFetchService = async (db: D1Database) => {
   const drizzleDB = createDB(db);
-  const result = await drizzleDB.select().from(brands);
+  const result = await drizzleDB.select().from(brands).orderBy(asc(brands.id));
   return result;
 };
 

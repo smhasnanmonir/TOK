@@ -57,7 +57,7 @@ const HeroSection = () => {
           <SwiperSlide>
             <img
               className="w-screen h-[450px] md:h-[400px] object-cover relative"
-              src="https://i.ibb.co/9mnJgdfp/Main-Banner-PC-01.webp"
+              src="https://cdn.tokbd.shop/Main-Banner-PC-01.webp"
               alt=""
             />
             <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px] px-[20px]">
@@ -75,7 +75,7 @@ const HeroSection = () => {
           <SwiperSlide>
             <img
               className="w-screen h-[450px] md:h-[400px] object-cover relative"
-              src="https://i.ibb.co/LzCKfFbv/Main-Banner-PC-03.webp"
+              src="https://cdn.tokbd.shop/Main-Banner-PC-03.webp"
               alt=""
             />
             <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center md:pl-[50px] space-y-[16px] px-[20px]    ">

@@ -1,38 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
-import medicube from "../../../asset/TopBrandLogo/Medicube.jpg";
-import anua from "../../../asset/TopBrandLogo/Anua.jpg";
-import skin1004 from "../../../asset/TopBrandLogo/Skin1004.jpg";
-import beauty_of_joseon from "../../../asset/TopBrandLogo/Beauty of joseon.jpg";
-import cosrx from "../../../asset/TopBrandLogo/COSRX.jpg";
-import missha from "../../../asset/TopBrandLogo/MISSHA.jpg";
-import mixsoon from "../../../asset/TopBrandLogo/Mixsoon.jpg";
-import purito from "../../../asset/TopBrandLogo/Purito.jpg";
+
 import { ShoppingBagIcon } from "lucide-react";
 import ShopBy from "../../shared/ShopBy/ShopBy";
 
-const ShopByTopBrand = () => {
-  const brandLogos = [
-    { name: "Skin1004", src: skin1004 },
-    { name: "Medicube", src: medicube },
-    { name: "Anua", src: anua },
-    { name: "Beauty of Joseon", src: beauty_of_joseon },
-    { name: "COSRX", src: cosrx },
-    { name: "Missha", src: missha },
-    { name: "Mixsoon", src: mixsoon },
-    { name: "Purito", src: purito },
-  ];
-
+const ShopByTopBrand = async () => {
+  const data = await fetch("https://backend.tokbd.shop/api/brands/fetch", {
+    cache: "force-cache",
+    next: {
+      revalidate: 3600,
+    },
+  });
+  const brandLogos = await data.json();
   return (
     <div className="px-[24px]">
       <ShopBy title="Shop By Brand"></ShopBy>
       <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
-        {brandLogos.map((brand) => (
+        {brandLogos.result?.slice(0, 8).map((brand: any) => (
           <div
             key={brand.name}
             className="overflow-hidden cursor-pointer relative group transition-all duration-500 ease-in-out transform origin-center hover:border-pink-200"
           >
             <img
-              src={brand.src.src}
+              src={brand.img}
               alt={brand.name}
               className="transition-all duration-500 ease-in-out transform origin-center block group-hover:grayscale-50"
             />

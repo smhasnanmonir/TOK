@@ -7,6 +7,7 @@ import { shopByCategoryRouter } from "./modules/shopbycategory/shopbycate.router
 import { shopByConcernRouter } from "./modules/shopbyconcern/shopbyconcern.router";
 import { shopByTypeRouter } from "./modules/shopbytype/shopbytype.router";
 import { productsRouter } from "./modules/products/products.router";
+import { brandRouter } from "./modules/brands/brands.router";
 
 const app = new Hono<{
   Bindings: {
@@ -49,6 +50,7 @@ app.route("/api/shop-by-category", shopByCategoryRouter);
 app.route("/api/shop-by-concern", shopByConcernRouter);
 app.route("/api/shop-by-type", shopByTypeRouter);
 app.route("/api/products", productsRouter);
+app.route("/api/brands", brandRouter);
 
 // 404 handler
 app.notFound((c) => {

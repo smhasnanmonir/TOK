@@ -1,4 +1,4 @@
-CREATE TABLE `shopByType` (
+CREATE TABLE `brands` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text NOT NULL,
 	`slug` text NOT NULL,
@@ -6,4 +6,4 @@ CREATE TABLE `shopByType` (
 	`created_at` integer
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `shopByType_slug_unique` ON `shopByType` (`slug`);
+CREATE UNIQUE INDEX `brands_slug_unique` ON `brands` (`slug`);

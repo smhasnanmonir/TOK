@@ -1,5 +1,4 @@
-// components/BrandsComponents/BrandList.tsx
-// import TypeCard from "../../shared/Cards/TypeCard";
+import TypeCard from "../../shared/Cards/TypeCard";
 
 type BrandType = {
   id: number;
@@ -20,10 +19,14 @@ const BrandList = async ({
     }),
     searchParams,
   ]);
+
+  if (!dataResponse.ok) {
+    throw new Error("Failed to fetch brands");
+  }
+
   const brandsData = await dataResponse.json();
 
-  // Synchronous filtering - no delays
-  let filteredBrands: BrandType[] = brandsData.result;
+  let filteredBrands: BrandType[] = [...brandsData.result];
   const query = resolvedSearchParams?.query || "";
 
   if (query) {
@@ -33,18 +36,30 @@ const BrandList = async ({
     );
   }
 
-  console.log(filteredBrands);
+  //   console.log(filteredBrands);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-[12px]">
-      {/* {filteredBrands.map((brand: BrandType) => (
-        <TypeCard
-          url={`/brands/${brand?.slug}`}
-          key={brand?.slug}
-          props={brand}
-        />
-      ))} */}
-    </div>
+    <>
+      <div>
+        {filteredBrands.length === 0 ? (
+          <>
+            <h1>No brands found</h1>
+          </>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-[12px]">
+              {filteredBrands.map((brand) => (
+                <TypeCard
+                  url={`/brands/${brand.slug}`}
+                  key={brand.slug}
+                  props={brand}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

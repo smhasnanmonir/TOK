@@ -2,6 +2,9 @@ import SearchBrands from "../components/BrandsComponents/SearchBrands/SearchBran
 import BrandList from "../components/BrandsComponents/BrandList/BrandList";
 import { Suspense } from "react";
 
+// Force dynamic rendering to prevent prerender issues
+export const dynamic = "force-dynamic";
+
 const BrandsPage = async ({
   searchParams,
 }: {

@@ -1,4 +1,5 @@
-const page = ({ params }: { params: { brand: string } }) => {
+const page = async ({ params }: { params: Promise<{ brand: string }> }) => {
+  const { brand } = await params;
   return (
     <div>
       <div className="bg-pink-500/20 px-[20px] py-[24px] flex flex-col space-y-[12px]">
@@ -10,7 +11,7 @@ const page = ({ params }: { params: { brand: string } }) => {
         </p>
       </div>
       <div>
-        <h1>{params.brand}</h1>
+        <h1>{brand}</h1>
         <h2>Hello</h2>
       </div>
     </div>

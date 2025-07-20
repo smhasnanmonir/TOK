@@ -1,5 +1,4 @@
 // components/BrandsComponents/BrandList.tsx
-import { Suspense } from "react";
 import TypeCard from "../../shared/Cards/TypeCard";
 
 type BrandType = {
@@ -14,11 +13,15 @@ const BrandList = async ({
 }: {
   searchParams: Promise<{ query?: string }>;
 }) => {
+  // Start fetching data immediately without awaiting searchParams
+  const dataPromise = fetch("https://backend.tokbd.shop/api/brands/fetch", {
+    cache: "force-cache",
+    next: { revalidate: 3600 },
+  });
+
+  // Await searchParams and data in parallel
   const [dataResponse, resolvedSearchParams] = await Promise.all([
-    fetch("https://backend.tokbd.shop/api/brands/fetch ", {
-      cache: "force-cache",
-      next: { revalidate: 3600 },
-    }),
+    dataPromise,
     searchParams,
   ]);
 
@@ -35,15 +38,11 @@ const BrandList = async ({
   }
 
   return (
-    <Suspense
-      fallback={<div className="grid place-items-center">Loading brands..</div>}
-    >
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-[12px]">
-        {filteredBrands.map((brand: BrandType) => (
-          <TypeCard key={brand?.slug} props={brand} />
-        ))}
-      </div>
-    </Suspense>
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-[12px]">
+      {filteredBrands.map((brand: BrandType) => (
+        <TypeCard url="" key={brand?.slug} props={brand} />
+      ))}
+    </div>
   );
 };
 

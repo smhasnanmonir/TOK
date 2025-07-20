@@ -21,7 +21,7 @@ const ShopByConcern = async () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 place-items-center gap-[12px] md:gap-[16px] px-[12px] md:px-[20px]">
           {concern?.result.map(
             (concern: { id: number; name: string; img: string }) => (
-              <Card props={concern} key={concern?.id}></Card>
+              <Card url="/" props={concern} key={concern?.id}></Card>
             )
           )}
         </div>

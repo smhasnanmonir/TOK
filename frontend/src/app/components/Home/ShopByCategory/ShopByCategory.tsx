@@ -20,7 +20,7 @@ const ShopByCategory = async () => {
       <div className="grid md:grid-cols-8 grid-cols-2 place-items-center gap-[16px] ">
         {categories?.result.map(
           (category: { id: number; name: string; img: string }) => (
-            <Card props={category} key={category.id}></Card>
+            <Card url="/" props={category} key={category.id}></Card>
           )
         )}
       </div>

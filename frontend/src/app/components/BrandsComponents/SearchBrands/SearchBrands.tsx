@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 
 const SearchBrands = () => {
   const router = useRouter();
@@ -9,20 +9,17 @@ const SearchBrands = () => {
     searchParams.get("search") || ""
   );
 
-  useEffect(() => {
-    if (!searchValue.trim()) {
-      router.push("/brands");
-    }
-  }, [searchValue, router]);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (searchValue.trim()) {
-      router.push(`/brands?search=${encodeURIComponent(searchValue.trim())}`);
-    } else {
-      router.push("/brands");
-    }
-  };
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (searchValue.trim()) {
+        router.push(`/brands?search=${encodeURIComponent(searchValue.trim())}`);
+      } else {
+        router.push("/brands");
+      }
+    },
+    [searchValue, router]
+  );
 
   return (
     <div className="">

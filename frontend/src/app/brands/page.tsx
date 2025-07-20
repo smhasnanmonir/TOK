@@ -23,9 +23,10 @@ const page = async ({
   };
 
   // Filter brands based on search parameter
-  const filteredBrands = params.search
+  const searchTerm = params.search?.toLowerCase().trim();
+  const filteredBrands = searchTerm
     ? brands.result.filter((brand: brandType) =>
-        brand.name.toLowerCase().includes(params.search!.toLowerCase())
+        brand.name.toLowerCase().includes(searchTerm)
       )
     : brands.result;
 

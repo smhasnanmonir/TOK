@@ -5,10 +5,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import NavSearch from "./NavSearch";
 import { usePathname } from "next/navigation";
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [searchData, setSearchData] = useState([]);
+  const [activeLink, setActiveLink] = useState<string | null>(null); // New state for active link
   const searchRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const searchBoxRef = useRef<HTMLDivElement>(null);
@@ -53,10 +55,10 @@ const Navbar = () => {
     setName(name);
     if (name.length > 0) {
       const response = await fetch(
-        `https://backend.tokbd.shop/api/products/search/${name}?page=${page}&pageSize=${pageSize}`
+        `https://backend.tokbd.shop/api/products/search/ ${name}?page=${page}&pageSize=${pageSize}`
       );
       const data = await response.json();
-      if (data.result.length > 0) {
+      if (data.result?.length > 0) {
         setSearchData(data.result);
       }
     } else {
@@ -69,15 +71,37 @@ const Navbar = () => {
       {/* Fixed Navbar */}
       <nav
         className={`inset-shadow-indigo-500/35 fixed top-0 left-1/2 transform -translate-x-1/2 backdrop-blur-[12px] border-[1px] border-pink-400/35 shadow-pink-400/35 rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center space-x-2 sm:space-x-6 w-fit max-w-[90vw] md:mt-4 mt-2 sm:max-w-3xl z-50 transition-all duration-300 ease-linear ${
-          open ? "scale-120 md:scale-100" : "scale-100"
+          open || activeLink ? "scale-110" : "scale-100"
         } ${pathname !== "/" ? "bg-pink-400/10" : "bg-white/10 "}`}
       >
         <ul className="flex space-x-2 sm:space-x-5 text-black font-semibold text-sm sm:text-base">
-          <Link className="block relative group" href={"/"}>
+          <Link
+            className={`block relative group cursor-pointer ${
+              activeLink === "home"
+                ? "underline underline-offset-4 decoration-pink-500"
+                : ""
+            }`}
+            href={"/"}
+            onClick={() => {
+              setActiveLink("home");
+              setTimeout(() => setActiveLink(null), 1000);
+            }}
+          >
             Home
             <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link className="block relative group" href={"/brands"}>
+          <Link
+            className={`block relative group cursor-pointer ${
+              activeLink === "brands"
+                ? "underline underline-offset-4 decoration-pink-500"
+                : ""
+            }`}
+            href={"/brands"}
+            onClick={() => {
+              setActiveLink("brands");
+              setTimeout(() => setActiveLink(null), 1000);
+            }}
+          >
             Brands
             <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
           </Link>

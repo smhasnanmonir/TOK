@@ -12,7 +12,7 @@ const TypeCard = ({
         src={props.img}
         alt={props.name}
       />
-      <h1 className="text-center text-[#E30B5D] font-semibold text-[12px] pt-[8px] md:pt-[12px] font-poppins">
+      <h1 className="text-center text-[#E30B5D] font-semibold text-[16px] pt-[8px] md:pt-[12px] font-poppins">
         {props.name}
       </h1>
     </div>

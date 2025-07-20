@@ -7,18 +7,18 @@ const page = async ({
 }: {
   searchParams: Promise<{ search?: string }>;
 }) => {
-  // Resolve fetch and searchParams in parallel
-  const [data, params] = await Promise.all([
-    fetch("https://backend.tokbd.shop/api/brands/fetch", {
-      cache: "force-cache",
-      next: {
-        revalidate: 3600,
-      },
-    }),
-    searchParams,
-  ]);
-
+  // Fetch brands independently
+  const data = await fetch("https://backend.tokbd.shop/api/brands/fetch", {
+    cache: "force-cache",
+    next: {
+      revalidate: 3600,
+    },
+  });
   const brands = await data.json();
+
+  // Resolve searchParams separately
+  const params = await searchParams;
+
   type brandType = {
     id: number;
     name: string;

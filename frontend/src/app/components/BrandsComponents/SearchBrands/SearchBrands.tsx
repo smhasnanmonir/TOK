@@ -1,38 +1,33 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useCallback } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { FormEvent, ChangeEvent } from "react";
 
 const SearchBrands = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const [searchValue, setSearchValue] = useState(
-    searchParams.get("search") || ""
-  );
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
-  const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (searchValue.trim()) {
-        router.push(`/brands?search=${encodeURIComponent(searchValue.trim())}`);
-      } else {
-        router.push("/brands");
-      }
-    },
-    [searchValue, router]
-  );
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const term = formData.get("search") as string;
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
 
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setSearchValue(value);
-
-      // If input becomes empty, immediately navigate to /brands
-      if (!value.trim()) {
-        router.push("/brands");
-      }
-    },
-    [router]
-  );
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    const params = new URLSearchParams(searchParams);
+    if (!term) {
+      params.delete("query");
+      replace(`${pathname}?${params.toString()}`);
+    }
+  };
 
   return (
     <div className="">
@@ -41,10 +36,11 @@ const SearchBrands = () => {
         className="w-full flex flex-col space-y-[12px]"
       >
         <input
+          name="search"
           className="block md:w-[400px] w-full border border-gray-300 rounded-md p-[12px]"
           type="text"
           placeholder="Search brands"
-          value={searchValue}
+          defaultValue={searchParams.get("query")?.toString()}
           onChange={handleInputChange}
         />
         <button

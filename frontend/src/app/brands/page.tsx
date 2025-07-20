@@ -7,13 +7,17 @@ const page = async ({
 }: {
   searchParams: Promise<{ search?: string }>;
 }) => {
-  const params = await searchParams;
-  const data = await fetch("https://backend.tokbd.shop/api/brands/fetch", {
-    cache: "force-cache",
-    next: {
-      revalidate: 3600,
-    },
-  });
+  // Resolve fetch and searchParams in parallel
+  const [data, params] = await Promise.all([
+    fetch("https://backend.tokbd.shop/api/brands/fetch", {
+      cache: "force-cache",
+      next: {
+        revalidate: 3600,
+      },
+    }),
+    searchParams,
+  ]);
+
   const brands = await data.json();
   type brandType = {
     id: number;
@@ -23,12 +27,13 @@ const page = async ({
   };
 
   // Filter brands based on search parameter
-  const searchTerm = params.search?.toLowerCase().trim();
-  const filteredBrands = searchTerm
-    ? brands.result.filter((brand: brandType) =>
-        brand.name.toLowerCase().includes(searchTerm)
-      )
-    : brands.result;
+  let filteredBrands = brands.result;
+  if (params?.search) {
+    const searchTerm = params.search.toLowerCase().trim();
+    filteredBrands = brands.result.filter((brand: brandType) =>
+      brand.name.toLowerCase().includes(searchTerm)
+    );
+  }
 
   return (
     <div className="md:pt-[80px] pt-[58px] ">

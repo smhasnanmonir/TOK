@@ -21,6 +21,19 @@ const SearchBrands = () => {
     [searchValue, router]
   );
 
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setSearchValue(value);
+
+      // If input becomes empty, immediately navigate to /brands
+      if (!value.trim()) {
+        router.push("/brands");
+      }
+    },
+    [router]
+  );
+
   return (
     <div className="">
       <form
@@ -32,7 +45,7 @@ const SearchBrands = () => {
           type="text"
           placeholder="Search brands"
           value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={handleInputChange}
         />
         <button
           className="max-w-fit bg-pink-500 cursor-pointer text-white px-[48px] py-[12px] rounded-md"

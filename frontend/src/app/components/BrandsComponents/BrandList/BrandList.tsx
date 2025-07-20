@@ -1,5 +1,5 @@
 // components/BrandsComponents/BrandList.tsx
-import TypeCard from "../../shared/Cards/TypeCard";
+// import TypeCard from "../../shared/Cards/TypeCard";
 
 type BrandType = {
   id: number;
@@ -33,15 +33,17 @@ const BrandList = async ({
     );
   }
 
+  console.log(filteredBrands);
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-[12px]">
-      {filteredBrands.map((brand: BrandType) => (
+      {/* {filteredBrands.map((brand: BrandType) => (
         <TypeCard
           url={`/brands/${brand?.slug}`}
           key={brand?.slug}
           props={brand}
         />
-      ))}
+      ))} */}
     </div>
   );
 };

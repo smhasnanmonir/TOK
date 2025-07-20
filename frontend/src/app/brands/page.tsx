@@ -2,11 +2,7 @@ import { Suspense } from "react";
 import SearchBrands from "../components/BrandsComponents/SearchBrands/SearchBrands";
 import TypeCard from "../components/shared/Cards/TypeCard";
 
-const page = async ({
-  searchParams,
-}: {
-  searchParams: Promise<{ search?: string }>;
-}) => {
+const page = async () => {
   // Fetch brands independently
   const data = await fetch("https://backend.tokbd.shop/api/brands/fetch", {
     cache: "force-cache",
@@ -17,7 +13,6 @@ const page = async ({
   const brands = await data.json();
 
   // Resolve searchParams separately
-  const params = await searchParams;
 
   type brandType = {
     id: number;
@@ -27,13 +22,14 @@ const page = async ({
   };
 
   // Filter brands based on search parameter
-  let filteredBrands = brands.result;
-  if (params?.search) {
-    const searchTerm = params.search.toLowerCase().trim();
-    filteredBrands = brands.result.filter((brand: brandType) =>
-      brand.name.toLowerCase().includes(searchTerm)
-    );
-  }
+  const filteredBrands = brands.result;
+  // const params = await searchParams;
+  // if (params?.search) {
+  //   const searchTerm = params.search.toLowerCase().trim();
+  //   filteredBrands = brands.result.filter((brand: brandType) =>
+  //     brand.name.toLowerCase().includes(searchTerm)
+  //   );
+  // }
 
   return (
     <div className="md:pt-[80px] pt-[58px] ">

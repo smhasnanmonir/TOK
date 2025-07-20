@@ -11,6 +11,7 @@ const page = ({ params }: { params: { brand: string } }) => {
       </div>
       <div>
         <h1>{params.brand}</h1>
+        <h2>Hello</h2>
       </div>
     </div>
   );

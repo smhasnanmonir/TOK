@@ -43,7 +43,7 @@ export async function generateMetadata({
       `${product?.details?.skin_concern} price in bd`,
     ],
     openGraph: {
-      title: `${product?.name} price in Bangladesh | TokBD`,
+      title: `${product?.name}| TokBD`,
       description: `${product?.name} price in BD.`,
       images: [product?.img],
       url: `https://tokbd.shop/products/${product?.slug}`,

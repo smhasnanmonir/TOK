@@ -55,7 +55,7 @@ const Navbar = () => {
     setName(name);
     if (name.length > 0) {
       const response = await fetch(
-        `https://backend.tokbd.shop/api/products/search/ ${name}?page=${page}&pageSize=${pageSize}`
+        `https://backend.tokbd.shop/api/products/search/${name}?page=${page}&pageSize=${pageSize}`
       );
       const data = await response.json();
       if (data.result?.length > 0) {

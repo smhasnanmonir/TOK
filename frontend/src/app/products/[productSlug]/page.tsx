@@ -17,6 +17,47 @@ export async function generateStaticParams() {
   );
 }
 
+// Generate Metadata Dynamically
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ productSlug: string }>;
+}) {
+  const { productSlug } = await params;
+  const response = await fetch(
+    `https://backend.tokbd.shop/api/products/fetch/${productSlug}`
+  );
+  const data = await response.json();
+
+  const product = data?.result;
+
+  return {
+    title: `${product?.name} price in Bangladesh | TokBD`,
+    description: `Buy ${product?.name} in Bangladesh at the best price. ${product?.details?.brand} price in Bangladesh. ${product?.details?.name} price in bd`,
+    keywords: [
+      `${product?.name} price in Bangladesh`,
+      `${product?.details?.brand} price in Bangladesh`,
+      `${product?.details?.name} price in bd`,
+      `${product?.details?.category} price in bd`,
+      `${product?.details?.skin_type} price in bd`,
+      `${product?.details?.skin_concern} price in bd`,
+    ],
+    openGraph: {
+      title: `${product?.name} price in Bangladesh | TokBD`,
+      description: `${product?.name} price in BD.`,
+      images: [product?.img],
+      url: `https://tokbd.shop/products/${product?.slug}`,
+      siteName: "TokBD",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product?.name} | TokBD`,
+      description: `${product?.name} price in BD.`,
+      images: [product?.img],
+    },
+  };
+}
+
 const ProductDetails = async ({
   params,
 }: {

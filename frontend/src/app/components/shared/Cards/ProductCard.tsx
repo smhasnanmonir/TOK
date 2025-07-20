@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
+
+import AddToCartButton from "../Button/AddToCartButton";
+import DetailsButton from "../Button/DetailsButton";
 
 const ProductCard = ({
   img,
@@ -25,22 +27,10 @@ const ProductCard = ({
 
         <div className="grid md:grid-cols-2 gap-[8px] w-full">
           {/* Add to Cart Button */}
-          <Link
-            href=""
-            className="block cursor-pointer rounded px-5 py-2.5 overflow-hidden group bg-pink-500 hover:bg-gradient-to-r hover:from-pink-500 hover:to-pink-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-pink-400 transition-all ease-out duration-300 text-center w-full mx-auto relative"
-          >
-            <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-            <span className="relative font-semibold">Add to Cart</span>
-          </Link>
+          <AddToCartButton></AddToCartButton>
 
           {/* View Details Button */}
-          <Link
-            href={`/products/${slug}`}
-            className="cursor-pointer block rounded px-5 py-2.5 overflow-hidden group bg-[#FFF300] hover:bg-gradient-to-r hover:from-[#FFF300] hover:to-[#FFF700] text-black hover:ring-2 hover:ring-offset-2 hover:ring-pink-400 transition-all ease-out duration-300 text-center w-full mx-auto relative"
-          >
-            <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-            <span className="relative font-semibold">View Details</span>
-          </Link>
+          <DetailsButton slug={slug}></DetailsButton>
         </div>
       </div>
     </div>

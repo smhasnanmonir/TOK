@@ -50,20 +50,24 @@ const page = async ({
         <div className="px-[3%]">
           <div>
             <div className="my-[12px]">
-              <div className="flex flex-col space-y-[12px]">
-                <SearchBrands />
-              </div>
+              <Suspense
+                fallback={
+                  <div className="grid place-items-center">
+                    Loading search..
+                  </div>
+                }
+              >
+                <div className="flex flex-col space-y-[12px]">
+                  <SearchBrands />
+                </div>
+              </Suspense>
             </div>
           </div>
-          <Suspense
-            fallback={<div className="grid place-items-center">Loading...</div>}
-          >
-            <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-[12px]">
-              {filteredBrands.map((brand: brandType) => (
-                <TypeCard key={brand?.slug} props={brand}></TypeCard>
-              ))}
-            </div>
-          </Suspense>
+          <div className="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-[12px]">
+            {filteredBrands.map((brand: brandType) => (
+              <TypeCard key={brand?.slug} props={brand}></TypeCard>
+            ))}
+          </div>
         </div>
       </div>
     </Suspense>

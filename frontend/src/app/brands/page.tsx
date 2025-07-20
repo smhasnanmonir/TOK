@@ -1,6 +1,6 @@
-import { Suspense } from "react";
 import SearchBrands from "../components/BrandsComponents/SearchBrands/SearchBrands";
 import BrandList from "../components/BrandsComponents/BrandList/BrandList";
+import { Suspense } from "react";
 
 const BrandsPage = async ({
   searchParams,
@@ -17,21 +17,15 @@ const BrandsPage = async ({
           Straightly for Korea! Buy with confidence.
         </p>
       </div>
-
       <div className="px-[3%]">
         <div className="my-[12px]">
-          <Suspense
-            fallback={
-              <div className="grid place-items-center">Loading search..</div>
-            }
-          >
-            <SearchBrands />
-          </Suspense>
+          <SearchBrands />
         </div>
-
         <Suspense
           fallback={
-            <div className="grid place-items-center">Loading brands..</div>
+            <div className="grid place-items-center h-screen">
+              Loading brands...
+            </div>
           }
         >
           <BrandList searchParams={searchParams} />

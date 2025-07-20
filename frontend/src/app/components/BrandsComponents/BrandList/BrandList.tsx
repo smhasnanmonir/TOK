@@ -13,22 +13,18 @@ const BrandList = async ({
 }: {
   searchParams: Promise<{ query?: string }>;
 }) => {
-  // Start fetching data immediately without awaiting searchParams
-  const dataPromise = fetch("https://backend.tokbd.shop/api/brands/fetch", {
-    cache: "force-cache",
-    next: { revalidate: 3600 },
-  });
-
-  // Await searchParams and data in parallel
   const [dataResponse, resolvedSearchParams] = await Promise.all([
-    dataPromise,
+    fetch("https://backend.tokbd.shop/api/brands/fetch", {
+      cache: "force-cache",
+      next: { revalidate: 3600 },
+    }),
     searchParams,
   ]);
-
   const brandsData = await dataResponse.json();
-  const query = resolvedSearchParams?.query || "";
 
-  let filteredBrands = brandsData.result;
+  // Synchronous filtering - no delays
+  let filteredBrands: BrandType[] = brandsData.result;
+  const query = resolvedSearchParams?.query || "";
 
   if (query) {
     const searchTerm = query.toLowerCase().trim();
@@ -40,7 +36,11 @@ const BrandList = async ({
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-[12px]">
       {filteredBrands.map((brand: BrandType) => (
-        <TypeCard url="" key={brand?.slug} props={brand} />
+        <TypeCard
+          url={`/brands/${brand?.slug}`}
+          key={brand?.slug}
+          props={brand}
+        />
       ))}
     </div>
   );

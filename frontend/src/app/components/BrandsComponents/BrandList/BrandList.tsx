@@ -1,24 +1,10 @@
-import { Suspense, use } from "react";
 import TypeCard from "../../shared/Cards/TypeCard";
-import { BrandCardSkeleton } from "../BrandsSkeleton/BrandsSkeleton";
 
 type BrandType = {
   id: number;
   name: string;
   slug: string;
   img: string;
-};
-
-// Component that handles the promise-based streaming
-const StreamingBrandCard = ({
-  brandPromise,
-}: {
-  brandPromise: Promise<BrandType>;
-}) => {
-  const brand = use(brandPromise);
-  return (
-    <TypeCard url={`/brands/${brand.slug}`} key={brand.slug} props={brand} />
-  );
 };
 
 const BrandList = async ({
@@ -50,15 +36,6 @@ const BrandList = async ({
     );
   }
 
-  // Create promises for streaming - each brand can load independently
-  const brandPromises = filteredBrands.map((brand) => {
-    // Option 1: Use real individual API calls for true streaming
-    // return fetchBrandData(brand.id).catch(() => brand);
-
-    // Option 2: Use existing data immediately (no artificial delays)
-    return Promise.resolve(brand);
-  });
-
   return (
     <>
       <div>
@@ -69,10 +46,12 @@ const BrandList = async ({
         ) : (
           <>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-[12px]">
-              {brandPromises.map((brandPromise, index) => (
-                <Suspense key={index} fallback={<BrandCardSkeleton />}>
-                  <StreamingBrandCard brandPromise={brandPromise} />
-                </Suspense>
+              {filteredBrands.map((brand) => (
+                <TypeCard
+                  key={brand.id}
+                  url={`/brands/${brand.slug}`}
+                  props={brand}
+                />
               ))}
             </div>
           </>

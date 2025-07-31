@@ -1,33 +1,47 @@
 "use client";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { FormEvent, ChangeEvent } from "react";
+import { FormEvent, ChangeEvent, useCallback, useMemo } from "react";
 
 const SearchBrands = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const term = formData.get("search") as string;
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set("query", term);
-    } else {
-      params.delete("query");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
+  // Memoize the current query to avoid unnecessary re-renders
+  const currentQuery = useMemo(
+    () => searchParams.get("query")?.toString() || "",
+    [searchParams]
+  );
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const term = e.target.value;
-    const params = new URLSearchParams(searchParams);
-    if (!term) {
-      params.delete("query");
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const term = formData.get("search") as string;
+      const params = new URLSearchParams(searchParams);
+      if (term) {
+        params.set("query", term);
+      } else {
+        params.delete("query");
+      }
       replace(`${pathname}?${params.toString()}`);
-    }
-  };
+    },
+    [searchParams, pathname, replace]
+  );
+
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const term = e.target.value;
+      // Only clear the query when input is completely empty
+      if (!term) {
+        const params = new URLSearchParams(searchParams);
+        params.delete("query");
+        replace(`${pathname}?${params.toString()}`);
+      }
+      // Don't update URL on every keystroke - only on form submit or clear
+    },
+    [searchParams, pathname, replace]
+  );
 
   return (
     <div className="">
@@ -40,7 +54,7 @@ const SearchBrands = () => {
           className="block md:w-[400px] w-full border border-gray-300 rounded-md p-[12px]"
           type="text"
           placeholder="Search brands"
-          defaultValue={searchParams.get("query")?.toString()}
+          defaultValue={currentQuery}
           onChange={handleInputChange}
         />
         <button

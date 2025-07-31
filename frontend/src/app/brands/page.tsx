@@ -1,5 +1,6 @@
 import SearchBrands from "../components/BrandsComponents/SearchBrands/SearchBrands";
 import BrandList from "../components/BrandsComponents/BrandList/BrandList";
+
 // Force dynamic rendering to prevent prerender issues
 export const dynamic = "force-dynamic";
 

@@ -37,6 +37,22 @@ const productsFetchByNameService = async (
   return result;
 };
 
+const productsFetchByBrandNameService = async (
+  db: D1Database,
+  name: string,
+  page: number,
+  pageSize: number
+) => {
+  const drizzleDB = createDB(db);
+  const result = await drizzleDB.query.products.findMany({
+    where: (products, { eq, sql }) =>
+      eq(sql`lower(${products.brand})`, sql`lower(${sql.param(name)})`),
+    limit: pageSize,
+    offset: (page - 1) * pageSize,
+  });
+  return result;
+};
+
 const productsPostService = async (
   db: D1Database,
   productProps: typeof products.$inferInsert,
@@ -96,4 +112,5 @@ export const productsService = {
   productsPostService,
   singleProductFetchService,
   productsFetchByNameService,
+  productsFetchByBrandNameService,
 };

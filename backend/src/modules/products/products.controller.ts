@@ -9,6 +9,7 @@ const productsFetchController = async (c: Context) => {
   });
 };
 
+//  ---------------------- Product from slug api starts ----------------------
 const singleProductFetchController = async (c: Context) => {
   const slug = c.req.param("slug");
   const result = await productsService.singleProductFetchService(
@@ -20,7 +21,9 @@ const singleProductFetchController = async (c: Context) => {
     result: result,
   });
 };
+//  ---------------------- Product from slug api ends ----------------------
 
+//  ---------------------- Product Search by name api starts ----------------------
 const productsFetchByNameController = async (c: Context) => {
   const name = c.req.param("name");
   const page = parseInt(c.req.query("page") || "1", 10);
@@ -39,7 +42,30 @@ const productsFetchByNameController = async (c: Context) => {
     pageSize: pageSize,
   });
 };
+//  ---------------------- Product Search by name api ends ----------------------
 
+//  ---------------------- Product Search by brand name api starts ----------------------
+const productsFetchByBrandNameController = async (c: Context) => {
+  const name = c.req.param("name");
+  const page = parseInt(c.req.query("page") || "1", 10);
+  const pageSize = parseInt(c.req.query("pageSize") || "10", 10);
+  console.log(name);
+  const result = await productsService.productsFetchByBrandNameService(
+    c.env.DB,
+    name,
+    page,
+    pageSize
+  );
+  return c.json({
+    message: "Products of brand fetched",
+    result: result,
+    page: page,
+    pageSize: pageSize,
+  });
+};
+//  ---------------------- Product Search by brand name api ends ----------------------
+
+//  ---------------------- Product Post api starts ----------------------
 const productsPostController = async (c: Context) => {
   //   console.log("Router hit!!!");
   const { products, productDetails } = await c.req.json();
@@ -65,10 +91,12 @@ const productsPostController = async (c: Context) => {
     });
   }
 };
+//  ---------------------- Product Post api ends ----------------------
 
 export const productsController = {
   productsFetchController,
   productsPostController,
   singleProductFetchController,
   productsFetchByNameController,
+  productsFetchByBrandNameController,
 };

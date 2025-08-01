@@ -20,3 +20,8 @@ productsRouter.get(
   "/search/:name",
   productsController.productsFetchByNameController
 );
+
+productsRouter.get(
+  "/search/brand/:name",
+  productsController.productsFetchByBrandNameController
+);

@@ -34,24 +34,24 @@ export async function generateMetadata({
   console.log("For metadata", brand);
 
   return {
-    title: `${brandData.name.toUpperCase()} Price in Bangladesh | TokBD`,
+    title: `${brandData.name.toUpperCase()} Price in Bangladesh | TOK`,
     description: `Buy ${brandData.name} in Bangladesh at the best price. ${brandData.name} price in Bangladesh. ${brandData.name} price in bd`,
     keywords: [
       `${brandData.name} price in Bangladesh`,
-      `${brand} price in Bangladesh`,
-      `${brand} price in bd`,
+      `${brandData.name} price in Bangladesh`,
+      `${brandData.name} price in bd`,
     ],
     openGraph: {
-      title: `${brandData.name}| TokBD`,
-      description: `${brandData.name} price in BD.`,
+      title: `${brandData.name} products in TOK.`,
+      description: `View ${brandData.name} product prices in Bangladesh.`,
       images: [brandData?.img],
       url: `https://tokbd.shop/brands/${brandData?.slug}`,
-      siteName: "TokBD",
+      siteName: "TOK",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${brandData.name} | TokBD`,
-      description: `${brandData.name} price in BD.`,
+      title: `${brandData.name} | TOK`,
+      description: `View ${brandData.name} product prices in Bangladesh.`,
       images: [brandData?.img],
     },
   };

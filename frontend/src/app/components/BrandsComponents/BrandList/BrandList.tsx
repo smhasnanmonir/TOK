@@ -1,5 +1,5 @@
 import TypeCard from "../../shared/Cards/TypeCard";
-import { use } from "react"; // Import use from react
+import { use } from "react";
 
 type BrandType = {
   id: number;
@@ -9,7 +9,6 @@ type BrandType = {
   createdAt: string;
 };
 
-// Function to fetch brands - can be used for caching if needed
 async function fetchBrands() {
   const res = await fetch("https://backend.tokbd.shop/api/brands/fetch", {
     cache: "force-cache",

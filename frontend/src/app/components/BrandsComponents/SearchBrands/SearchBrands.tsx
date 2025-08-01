@@ -51,14 +51,14 @@ const SearchBrands = () => {
       >
         <input
           name="search"
-          className="block md:w-[400px] w-full border border-gray-300 rounded-md p-[12px]"
+          className="block md:w-[400px] w-full border border-gray-300 rounded-md md:p-[12px] p-[8px]"
           type="text"
           placeholder="Search brands"
           defaultValue={currentQuery}
           onChange={handleInputChange}
         />
         <button
-          className="max-w-fit bg-pink-500 cursor-pointer text-white px-[48px] py-[12px] rounded-md"
+          className="max-w-fit bg-pink-500 cursor-pointer text-white px-[48px] md:px-[36px] md:py-[12px] py-[8px] rounded-md"
           type="submit"
         >
           Search

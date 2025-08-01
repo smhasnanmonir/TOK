@@ -1,5 +1,6 @@
 import SearchBrands from "../components/BrandsComponents/SearchBrands/SearchBrands";
 import BrandList from "../components/BrandsComponents/BrandList/BrandList";
+import { Suspense } from "react";
 
 // Force dynamic rendering to prevent prerender issues
 export const dynamic = "force-dynamic";
@@ -19,11 +20,26 @@ const BrandsPage = async ({
           Straightly for Korea! Buy with confidence.
         </p>
       </div>
-      <div className="px-[3%]">
-        <div className="my-[12px]">
-          <SearchBrands />
-        </div>
+      <div className="my-[12px] px-[3%]">
+        <Suspense
+          fallback={
+            <div className="w-full flex flex-col space-y-[12px]">
+              {/* Search input skeleton */}
+              <div className="block md:w-[400px] w-full border border-gray-300 rounded-md p-[12px] bg-gray-200 animate-pulse">
+                <div className="h-4 bg-gray-300 rounded w-1/3"></div>
+              </div>
 
+              {/* Button skeleton */}
+              <div className="max-w-fit bg-gray-200 cursor-pointer text-white px-[48px] py-[12px] rounded-md animate-pulse">
+                <div className="h-4 bg-gray-300 rounded w-16"></div>
+              </div>
+            </div>
+          }
+        >
+          <SearchBrands />
+        </Suspense>
+      </div>
+      <div className="px-[3%]">
         <BrandList searchParams={searchParams} />
       </div>
     </div>

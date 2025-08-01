@@ -43,7 +43,10 @@ const BrandPage = ({ params }: { params: Promise<{ brand: string }> }) => {
   const brandWiseProductData = use(getBrandProducts(brand));
 
   return (
-    <div className="md:py-[80px] py-[55px]">
+    <div
+      className="md:py-[80px] py-[55px]"
+      style={{ viewTransitionName: "brand-detail-page" }}
+    >
       <div className="bg-pink-500/20 px-[20px] py-[24px] flex flex-col space-y-[12px]">
         <h1 className="md:text-center md:text-2xl font-semibold">
           {brand.toUpperCase()} Price in Bangladesh

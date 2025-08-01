@@ -9,6 +9,14 @@ const brandFetchService = async (db: D1Database) => {
   return result;
 };
 
+const singleBrandFetchService = async (db: D1Database, brand: string) => {
+  const drizzleDB = createDB(db);
+  const result = await drizzleDB.query.brands.findFirst({
+    where: (brands, { eq }) => eq(brands.slug, brand),
+  });
+  return result;
+};
+
 const brandPostService = async (
   db: D1Database,
   props: typeof brands.$inferInsert
@@ -25,4 +33,5 @@ const brandPostService = async (
 export const brandService = {
   brandFetchService,
   brandPostService,
+  singleBrandFetchService,
 };

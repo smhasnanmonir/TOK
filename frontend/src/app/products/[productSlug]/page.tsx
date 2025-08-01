@@ -31,16 +31,15 @@ export async function generateMetadata({
 
   const product = data?.result;
 
+  console.log("For metadata", product);
+
   return {
     title: `${product?.name} price in Bangladesh | TokBD`,
-    description: `Buy ${product?.name} in Bangladesh at the best price. ${product?.details?.brand} price in Bangladesh. ${product?.details?.name} price in bd`,
+    description: `Buy ${product?.name} in Bangladesh at the best price. ${product?.brand} price in Bangladesh. ${product?.name} price in bd`,
     keywords: [
       `${product?.name} price in Bangladesh`,
-      `${product?.details?.brand} price in Bangladesh`,
-      `${product?.details?.name} price in bd`,
-      `${product?.details?.category} price in bd`,
-      `${product?.details?.skin_type} price in bd`,
-      `${product?.details?.skin_concern} price in bd`,
+      `${product?.brand} price in Bangladesh`,
+      `${product?.category} price in bd`,
     ],
     openGraph: {
       title: `${product?.name}| TokBD`,

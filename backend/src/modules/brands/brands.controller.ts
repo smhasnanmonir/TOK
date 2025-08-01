@@ -9,6 +9,15 @@ const brandFetchController = async (c: Context) => {
   });
 };
 
+const singleBrandFetchController = async (c: Context) => {
+  const brand = c.req.query("brand") || "";
+  const result = await brandService.singleBrandFetchService(c.env.DB, brand);
+  return c.json({
+    message: "Brand fetched",
+    result: result,
+  });
+};
+
 const brandPostController = async (c: Context) => {
   const { name, slug, img } = await c.req.json();
   try {
@@ -32,4 +41,5 @@ const brandPostController = async (c: Context) => {
 export const brandController = {
   brandFetchController,
   brandPostController,
+  singleBrandFetchController,
 };

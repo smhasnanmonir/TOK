@@ -11,7 +11,10 @@ const BrandsPage = async ({
   searchParams: Promise<{ query?: string }>;
 }) => {
   return (
-    <div className="md:pt-[80px] pt-[58px] overflow-hidden">
+    <div
+      className="md:pt-[80px] pt-[58px] overflow-hidden"
+      style={{ viewTransitionName: "brands-page" }}
+    >
       <div className="bg-pink-500/20 px-[20px] py-[24px] flex flex-col space-y-[12px]">
         <h1 className="md:text-center md:text-2xl font-semibold">
           TOK offers products from top Korean brands

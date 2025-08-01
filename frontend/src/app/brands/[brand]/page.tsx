@@ -18,6 +18,45 @@ export type ProductType = {
   pageSize: number;
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ brand: string }>;
+}) {
+  const { brand } = await params;
+  const response = await fetch(
+    `https://backend.tokbd.shop/api/brands/single-fetch?brand=${brand}`
+  );
+  const data = await response.json();
+
+  const brandData = data?.result;
+
+  console.log("For metadata", brand);
+
+  return {
+    title: `${brandData.name.toUpperCase()} Price in Bangladesh | TokBD`,
+    description: `Buy ${brandData.name} in Bangladesh at the best price. ${brandData.name} price in Bangladesh. ${brandData.name} price in bd`,
+    keywords: [
+      `${brandData.name} price in Bangladesh`,
+      `${brand} price in Bangladesh`,
+      `${brand} price in bd`,
+    ],
+    openGraph: {
+      title: `${brandData.name}| TokBD`,
+      description: `${brandData.name} price in BD.`,
+      images: [brandData?.img],
+      url: `https://tokbd.shop/brands/${brandData?.slug}`,
+      siteName: "TokBD",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${brandData.name} | TokBD`,
+      description: `${brandData.name} price in BD.`,
+      images: [brandData?.img],
+    },
+  };
+}
+
 // Async function to fetch products by brand
 async function getBrandProducts(brand: string) {
   const res = await fetch(

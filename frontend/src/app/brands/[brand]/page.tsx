@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ProductCard from "@/app/components/shared/Cards/ProductCard";
-import { Suspense, use } from "react";
+import {
+  Suspense,
+  use,
+  unstable_ViewTransition as ViewTransition,
+} from "react";
 
 export type ProductType = {
   id: number;
@@ -42,11 +46,13 @@ export async function generateMetadata({
       `${brandData.name} price in bd`,
     ],
     openGraph: {
-      title: `${brandData.name} products in TOK.`,
+      title: `${brandData.name} products in TOK`,
       description: `View ${brandData.name} product prices in Bangladesh.`,
       images: [brandData?.img],
       url: `https://tokbd.shop/brands/${brandData?.slug}`,
       siteName: "TOK",
+      type: "website",
+      logo: "",
     },
     twitter: {
       card: "summary_large_image",
@@ -82,38 +88,37 @@ const BrandPage = ({ params }: { params: Promise<{ brand: string }> }) => {
   const brandWiseProductData = use(getBrandProducts(brand));
 
   return (
-    <div
-      className="md:py-[80px] py-[55px]"
-      style={{ viewTransitionName: "brand-detail-page" }}
-    >
-      <div className="bg-pink-500/20 px-[20px] py-[24px] flex flex-col space-y-[12px]">
-        <h1 className="md:text-center md:text-2xl font-semibold">
-          {brand.toUpperCase()} Price in Bangladesh
-        </h1>
-        <p className="md:text-center md:text-xl text-sm text-gray-500">
-          Straightly for Korea! Buy with confidence.
-        </p>
-      </div>
-      <div className="px-[3%] md:py-[24px] py-[12px]">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-[12px]">
-          {brandWiseProductData.result.map((product: any) => (
-            <Suspense
-              key={product.id}
-              fallback={
-                <div className="grid place-items-center">Loading...</div>
-              }
-            >
-              <ProductCard
-                name={product.name}
-                price={product.price}
-                slug={product.slug}
-                img={product.img}
-              />
-            </Suspense>
-          ))}
+    <ViewTransition name="brand-transition">
+      <div className="md:py-[80px] py-[55px] page-enter">
+        <div className="bg-pink-500/20 px-[20px] py-[24px] flex flex-col space-y-[12px]">
+          <h1 className="md:text-center md:text-2xl font-semibold">
+            {brand.toUpperCase()} Price in Bangladesh
+          </h1>
+          <p className="md:text-center md:text-xl text-sm text-gray-500">
+            Straightly for Korea! Buy with confidence.
+          </p>
+        </div>
+        <div className="px-[3%] md:py-[24px] py-[12px]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-[12px]">
+            {brandWiseProductData.result.map((product: any) => (
+              <Suspense
+                key={product.id}
+                fallback={
+                  <div className="grid place-items-center">Loading...</div>
+                }
+              >
+                <ProductCard
+                  name={product.name}
+                  price={product.price}
+                  slug={product.slug}
+                  img={product.img}
+                />
+              </Suspense>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </ViewTransition>
   );
 };
 

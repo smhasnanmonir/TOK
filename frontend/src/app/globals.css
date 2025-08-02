@@ -59,7 +59,7 @@
 }
 
 .page-enter {
-  animation: pageLoad 300ms ease-linear;
+  animation: pageLoad 300ms ease-out;
 }
 
 /* Brand detail page transitions */

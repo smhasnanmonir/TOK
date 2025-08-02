@@ -10,4 +10,5 @@ export const brandRouter = new Hono<{
 }>();
 
 brandRouter.get("/fetch", brandController.brandFetchController);
+brandRouter.get("/single-fetch", brandController.singleBrandFetchController);
 brandRouter.post("/post", brandController.brandPostController);
